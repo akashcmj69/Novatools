@@ -7,6 +7,15 @@
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    .tool-link {
+  text-decoration: none;   /* underline hatayega */
+  color: inherit;          /* text ka color same rakhega */
+  display: block;          /* poore div ko clickable banayega */
+}
+
+.tool-link:hover {
+  color: #ff00cc;          /* hover effect (optional) */
+}
     :root {
       --bg-primary: #0d0d0d;
       --bg-secondary: rgba(255, 255, 255, 0.05);
@@ -627,7 +636,7 @@
     <h2 class="pdf-tools-heading">PDF TOOLS</h2>
     <div class="pdf-tools-grid">
       <!-- Merge PDF -->
-      <a href="merge-pdf.html">
+      <a href="merge-pdf.html" class=tool-link">
       <div class="pdf-tool-card">
         <div class="pdf-tool-icon">
           <i class="fas fa-plus-circle"></i>
