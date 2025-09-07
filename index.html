@@ -560,6 +560,33 @@
       opacity: 0.7;
     }
 
+    /* Footer Styles */
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-color);
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       h1 {
@@ -579,6 +606,15 @@
       
       .logo {
         flex: 1;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .footer-links a {
+        font-size: 16px;
       }
     }
   </style>
@@ -789,19 +825,20 @@
       </div>
     </div>
   </section>
-  <!-- Placeholder Sections -->
-  <section class="section" id="faq">
-    <h2>FAQ</h2>
-    <p>COMING SOON: FREQUENTLY ASKED QUESTIONS ABOUT OUR TOOLS.</p>
-  </section>
-  <section class="section" id="how-to-use">
-    <h2>HOW TO USE</h2>
-    <p>COMING SOON: TUTORIALS AND GUIDES FOR USING OUR TOOLS.</p>
-  </section>
-  <section class="section" id="about">
-    <h2>ABOUT US</h2>
-    <p>COMING SOON: INFORMATION ABOUT OUR MISSION AND TEAM.</p>
-  </section>
+  <!-- Footer Section -->
+  <footer class="section" id="footer">
+    <div class="footer-container" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px; text-align: center;">
+      <div class="footer-links">
+        <a href="#terms">Terms of Service</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#contact">Contact Us</a>
+        <a href="#disclaimer">Disclaimer</a>
+      </div>
+      <p style="margin-top: 20px; font-size: 14px; opacity: 0.7;">
+        &copy; 2025 Nova Tools. All rights reserved.
+      </p>
+    </div>
+  </footer>
   <script>
     // Theme Toggle Functionality
     const themeToggle = document.getElementById('themeToggle');
