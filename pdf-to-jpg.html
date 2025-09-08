@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nova Tools</title>
+  <title>Nova Tools - PDF to JPG Converter</title>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -802,19 +802,19 @@
   <!-- Overlay for mobile menu -->
   <div class="overlay" id="overlay"></div>
 
- <!-- Tools Section -->
-<section class="section" id="tools">
-  <h2>PDF TO JPG</h2>
-  <div class="tools-grid">
-    <div class="tool-card" onclick="openPdfModal('convert')">
-      <div class="tool-icon">
-        <i class="fas fa-file-export"></i> <!-- Updated icon to fa-image -->
+  <!-- Tools Section -->
+  <section class="section" id="tools">
+    <h2>PDF to JPG</h2>
+    <div class="tools-grid">
+      <div class="tool-card" onclick="openPdfModal('convert')">
+        <div class="tool-icon">
+          <i class="fas fa-file-image"></i>
+        </div>
+        <h3>PDF to JPG</h3>
+        <center><p>Convert the first page of your PDF to a JPG image.</p></center>
       </div>
-      <h3>PDF to JPG</h3>
-      <center><p>Convert PDF pages to JPG images.</p></center>
     </div>
-  </div>
-</section>
+  </section>
   
   <!-- PDF Tools Modal -->
   <div class="modal" id="pdfModal">
@@ -827,10 +827,10 @@
           <i class="fas fa-cloud-upload-alt"></i>
         </div>
         <p class="modal-upload-text">
-          <label for="fileInput" style="cursor: pointer; color:#000000;">Choose File</label>
+          <label for="fileInput" style="cursor: pointer; color: var(--text-secondary);">Choose File</label>
         </p>
         <span id="selectedFileName">No file chosen</span>
-        <p class="modal-upload-hint" id="uploadHint">Select a PDF file to convert</p>
+        <p class="modal-upload-hint" id="uploadHint">Select a PDF file to convert to JPG (first page only)</p>
         <input type="file" id="fileInput" accept=".pdf">
       </div>
       
@@ -842,12 +842,10 @@
         <div class="progress-bar" id="progressBar"></div>
       </div>
       
-      <button class="modal-action-btn" id="processBtn">Process File</button>
-      <a class="download-btn" id="downloadBtn" download><i class="fas fa-download"></i> Download Results</a>
+      <button class="modal-action-btn" id="processBtn">Convert File</button>
+      <a class="download-btn" id="downloadBtn" download><i class="fas fa-download"></i> Download JPG</a>
     </div>
   </div>
-
- 
 
   <script>
     // Theme Toggle Functionality
@@ -1002,11 +1000,31 @@
     
     const selectedFileNameDisplay = document.getElementById('selectedFileName');
     
+    // Check if pdf.js is loaded
+    const pdfjsReadyPromise = new Promise((resolve, reject) => {
+      if (typeof pdfjsLib !== 'undefined') {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+        resolve(pdfjsLib);
+      } else {
+        const interval = setInterval(() => {
+          if (typeof pdfjsLib !== 'undefined') {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+            clearInterval(interval);
+            resolve(pdfjsLib);
+          }
+        }, 100);
+        setTimeout(() => {
+          clearInterval(interval);
+          reject(new Error('pdf.js library failed to load.'));
+        }, 10000);
+      }
+    });
+
     function openPdfModal(tool) {
       resetModal();
       
       document.getElementById('pdfModalTitle').textContent = 'Free PDF to JPG Converter';
-      document.getElementById('uploadHint').textContent = 'Select a PDF file to convert';
+      document.getElementById('uploadHint').textContent = 'Select a PDF file to convert to JPG (first page only)';
       
       document.getElementById('pdfModal').classList.add('active');
       document.getElementById('downloadBtn').classList.add('pulse');
@@ -1089,6 +1107,7 @@
       } else {
         uploadArea.classList.remove('active');
         selectedFileNameDisplay.textContent = 'No file chosen';
+        alert('Please select a valid PDF file.');
       }
     }
     
@@ -1143,7 +1162,7 @@
         downloadBtn.style.display = 'block';
         downloadBtn.href = result.url;
         downloadBtn.download = result.filename;
-        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Results';
+        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download JPG';
       } catch (error) {
         console.error('Error converting PDF:', error);
         alert('Error converting PDF: ' + error.message);
@@ -1158,14 +1177,21 @@
     }
     
     async function convertPdfToJpg() {
-      const file = uploadedFiles[0];
-      const arrayBuffer = await readFileAsArrayBuffer(file);
-      const loadingTask = pdfjsLib.getDocument({data: arrayBuffer});
-      const pdf = await loadingTask.promise;
-      const zip = new JSZip();
-      
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
+      try {
+        await pdfjsReadyPromise; // Ensure pdf.js is loaded
+        const file = uploadedFiles[0];
+        const arrayBuffer = await readFileAsArrayBuffer(file);
+        const loadingTask = pdfjsLib.getDocument({data: arrayBuffer});
+        const pdf = await loadingTask.promise;
+        
+        if (pdf.numPages === 0) {
+          throw new Error('The PDF file is empty or invalid.');
+        }
+
+        updateProgress(50);
+
+        // Convert only the first page
+        const page = await pdf.getPage(1);
         const viewport = page.getViewport({ scale: 2.0 }); // Higher scale for better quality
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
@@ -1178,34 +1204,26 @@
         }).promise;
         
         const imageDataUrl = canvas.toDataURL('image/jpeg', 0.9); // Adjust quality as needed
-        const base64Data = imageDataUrl.split(',')[1];
-        zip.file(`page_${i}.jpg`, base64Data, {base64: true});
-        updateProgress((i / pdf.numPages) * 100);
+        
+        updateProgress(100);
+
+        return {
+          url: imageDataUrl,
+          filename: file.name.replace(/\.pdf$/i, '.jpg')
+        };
+      } catch (error) {
+        throw new Error('Failed to convert PDF to JPG: ' + error.message);
       }
-      
-      const zipBlob = await zip.generateAsync({ type: 'blob' });
-      return {
-        url: URL.createObjectURL(zipBlob),
-        filename: 'converted_images.zip'
-      };
     }
     
     function readFileAsArrayBuffer(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
+        reader.onerror = () => reject(new Error('Failed to read the file.'));
         reader.readAsArrayBuffer(file);
       });
     }
-    
-    // Load JSZip for handling multiple image downloads
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-    script.onload = () => {
-      console.log('JSZip loaded');
-    };
-    document.head.appendChild(script);
   </script>
 </body>
 </html>
