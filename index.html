@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nova Tools offers a variety of PDF and Finance tools for seamless document management and financial calculations. Explore our free tools today!">
+  <meta name="keywords" content="Nova Tools, PDF tools, Finance tools, document management, financial calculators, free tools, PDF conversion">
+  <meta name="robots" content="index, follow">
   <title>Nova Tools - Landing Page</title>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-     a, a:visited, a:active, a h3, a p {
-  text-decoration: none !important;
-  color: inherit !important;
-}
+    a, a:visited, a:active, a h3, a p {
+      text-decoration: none !important;
+      color: inherit !important;
+    }
 
-.tool-link {
-  display: block;
-}
+    .tool-link {
+      display: block;
+    }
 
     :root {
       --bg-primary: #0d0d0d;
@@ -491,8 +494,8 @@
       opacity: 0.7;
     }
 
-    /* PDF Tools Section */
-    .pdf-tools-heading {
+    /* PDF Tools and Finance Tools Section */
+    .pdf-tools-heading, .finance-tools-heading {
       position: relative;
       display: block;
       text-align: center;
@@ -500,7 +503,7 @@
       width: 100%;
     }
 
-    .pdf-tools-heading::after {
+    .pdf-tools-heading::after, .finance-tools-heading::after {
       content: '';
       position: absolute;
       bottom: -15px;
@@ -512,8 +515,8 @@
       border-radius: 2px;
     }
 
-    /* PDF Tools Grid */
-    .pdf-tools-grid {
+    /* PDF Tools and Finance Tools Grid */
+    .pdf-tools-grid, .finance-tools-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
@@ -521,8 +524,8 @@
       margin: 0 auto;
     }
 
-    /* PDF Tool cards */
-    .pdf-tool-card {
+    /* Tool cards */
+    .pdf-tool-card, .finance-tool-card {
       background: var(--card-bg);
       border-radius: 12px;
       padding: 30px 20px;
@@ -531,13 +534,13 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
-    .pdf-tool-card:hover {
+    .pdf-tool-card:hover, .finance-tool-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
       background: rgba(255, 255, 255, 0.15);
     }
 
-    .pdf-tool-icon {
+    .pdf-tool-icon, .finance-tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
       color: #ff00cc;
@@ -547,13 +550,13 @@
       justify-content: center;
     }
 
-    .pdf-tool-card h3 {
+    .pdf-tool-card h3, .finance-tool-card h3 {
       font-size: 22px;
       margin-bottom: 15px;
       color: var(--text-primary);
     }
 
-    .pdf-tool-card p {
+    .pdf-tool-card p, .finance-tool-card p {
       color: var(--text-secondary);
       font-size: 16px;
       line-height: 1.5;
@@ -596,7 +599,7 @@
         font-size: 16px;
       }
       
-      .tools-grid, .pdf-tools-grid {
+      .tools-grid, .pdf-tools-grid, .finance-tools-grid {
         grid-template-columns: 1fr;
       }
       
@@ -637,11 +640,13 @@
             <a href="#tools">TOOLS</a>
             <div class="dropdown-menu">
               <a href="#pdf-tools">PDF TOOLS</a>
+              <a href="#finance-tools">FINANCE TOOLS</a>
             </div>
           </li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#how-to-use">HOW TO USE</a></li>
-          <li><a href="about-us.html">ABOUT US</a></li>
+          <li><a href="about.html">ABOUT US</a></li>
+         
         </ul>
         <!-- Theme Toggle -->
         <div class="theme-toggle" id="themeToggle"></div>
@@ -657,8 +662,8 @@
   <div class="overlay" id="overlay"></div>
   <!-- Content -->
   <section class="hero section" id="home">
-    <h1>WELCOME TO MY TOOLS</h1>
-    <p>ALL-IN-ONE TOOLS WITH DEMO STYLE FALLING PARTICLES & SLOW PEPPER EFFECT.</p>
+    <h1>WELCOME TO NOVA TOOLS</h1>
+    <p>ALL-IN-ONE PDF AND FINANCE TOOLS WITH DEMO STYLE FALLING PARTICLES & SLOW PEPPER EFFECT.</p>
     <button class="btn" onclick="document.getElementById('tools').scrollIntoView({behavior: 'smooth'})">EXPLORE ALL TOOLS</button>
   </section>
   <!-- Tools Section -->
@@ -672,100 +677,142 @@
     <h2 class="pdf-tools-heading">PDF TOOLS</h2>
     <div class="pdf-tools-grid">
       <!-- Merge PDF -->
-       <a href="merge-pdf.html" class=tool-link">
-      <div class="pdf-tool-card">
-        <div class="pdf-tool-icon">
-          <i class="fas fa-plus-circle"></i>
+      <a href="merge-pdf.html" class="tool-link">
+        <div class="pdf-tool-card">
+          <div class="pdf-tool-icon">
+            <i class="fas fa-plus-circle"></i>
+          </div>
+          <h3>Merge PDF</h3>
+          <p>Combine multiple PDF files into one document.</p>
         </div>
-        <h3>Merge PDF</h3>
-        <p>Combine multiple PDF files into one document.</p>
-      </div>
-        </a>                               
+      </a>                               
       <!-- Split PDF -->
-       <a href="split-pdf.html" class=tool-link">                                 
-      <div class="pdf-tool-card">
-        <div class="pdf-tool-icon">
-          <i class="fas fa-cut"></i>
+      <a href="split-pdf.html" class="tool-link">                                 
+        <div class="pdf-tool-card">
+          <div class="pdf-tool-icon">
+            <i class="fas fa-cut"></i>
+          </div>
+          <h3>Split PDF</h3>
+          <p>Divide a large PDF into separate pages or files.</p>
         </div>
-        <h3>Split PDF</h3>
-        <p>Divide a large PDF into separate pages or files.</p>
-      </div>
       </a>
       <!-- Image to PDF -->
-      <a href="image-to-pdf.html" class=tool-link">
-      <div class="pdf-tool-card">
-        <div class="pdf-tool-icon">
-          <i class="fas fa-file-image"></i>
+      <a href="image-to-pdf.html" class="tool-link">
+        <div class="pdf-tool-card">
+          <div class="pdf-tool-icon">
+            <i class="fas fa-file-image"></i>
+          </div>
+          <h3>Image to PDF</h3>
+          <p>Convert images into a single, easy-to-share PDF.</p>
         </div>
-        <h3>Image to PDF</h3>
-        <p>Convert images into a single, easy-to-share PDF.</p>
-      </div>
-     </a>                                
+      </a>                                
       <!-- PDF to JPG -->
-       <a href="pdf-to-jpg.html" class=tool-link">                               
-      <div class="pdf-tool-card">
-        <div class="pdf-tool-icon">
-          <i class="fas fa-file-export"></i>
+      <a href="pdf-to-jpg.html" class="tool-link">                               
+        <div class="pdf-tool-card">
+          <div class="pdf-tool-icon">
+            <i class="fas fa-file-export"></i>
+          </div>
+          <h3>PDF to JPG</h3>
+          <p>Convert each page of a PDF to a JPG image.</p>
         </div>
-        <h3>PDF to JPG</h3>
-        <p>Convert each page of a PDF to a JPG image.</p>
-      </div>
       </a>
       <!-- Compress PDF -->
-     <a href="compress-pdf.html" class=tool-link">   
-      <div class="pdf-tool-card">
-        <div class="pdf-tool-icon">
-          <i class="fas fa-compress-alt"></i>
+      <a href="compress-pdf.html" class="tool-link">   
+        <div class="pdf-tool-card">
+          <div class="pdf-tool-icon">
+            <i class="fas fa-compress-alt"></i>
+          </div>
+          <h3>Compress PDF</h3>
+          <p>Compress PDF files to reduce file size.</p>
         </div>
-        <h3>Compress PDF</h3>
-        <p>Compress PDF files to reduce file size.</p>
-      </div>
-     </a>
-       
-        
+      </a>
       <!-- Excel to PDF -->
-       <a href="excel-to-pdf.html" class=tool-link"> 
-      <div class="pdf-tool-card">
-        <div class="pdf-tool-icon">
-          <i class="fas fa-file-excel"></i>
+      <a href="excel-to-pdf.html" class="tool-link"> 
+        <div class="pdf-tool-card">
+          <div class="pdf-tool-icon">
+            <i class="fas fa-file-excel"></i>
+          </div>
+          <h3>Excel to PDF</h3>
+          <p>Convert Excel spreadsheets to PDF format.</p>
         </div>
-        <h3>Excel to PDF</h3>
-        <p>Convert Excel spreadsheets to PDF format.</p>
-      </div>
-       </a>
-      
-     
+      </a>
       <!-- Add Watermark to PDF -->
-      <a href="add-watermark-to-pdf.html" class=tool-link"> 
-      <div class="pdf-tool-card">
-        <div class="pdf-tool-icon">
-          <i class="fas fa-stamp"></i>
+      <a href="add-watermark-to-pdf.html" class="tool-link"> 
+        <div class="pdf-tool-card">
+          <div class="pdf-tool-icon">
+            <i class="fas fa-stamp"></i>
+          </div>
+          <h3>Add Watermark to PDF</h3>
+          <p>Add text or image watermarks to PDF documents.</p>
         </div>
-        <h3>Add Watermark to PDF</h3>
-        <p>Add text or image watermarks to PDF documents.</p>
-      </div>
       </a>
       <!-- Add Page Number -->
-      <a href="add-page-number.html" class=tool-link"> 
-      <div class="pdf-tool-card">
-        <div class="pdf-tool-icon">
-          <i class="fas fa-list-ol"></i>
+      <a href="add-page-number.html" class="tool-link"> 
+        <div class="pdf-tool-card">
+          <div class="pdf-tool-icon">
+            <i class="fas fa-list-ol"></i>
+          </div>
+          <h3>Add Page Number</h3>
+          <p>Add page numbers to your PDF documents.</p>
         </div>
-        <h3>Add Page Number</h3>
-        <p>Add page numbers to your PDF documents.</p>
-      </div>
       </a>
       <!-- WhatsApp Chat to PDF -->
-      <a href="whatsapp-chat-to-pdf.html" class=tool-link"> 
-      <div class="pdf-tool-card">
-        <div class="pdf-tool-icon">
-          <i class="fab fa-whatsapp"></i>
+      <a href="whatsapp-chat-to-pdf.html" class="tool-link"> 
+        <div class="pdf-tool-card">
+          <div class="pdf-tool-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <h3>WhatsApp Chat to PDF</h3>
+          <p>Convert WhatsApp chat exports to PDF format.</p>
         </div>
-        <h3>WhatsApp Chat to PDF</h3>
-        <p>Convert WhatsApp chat exports to PDF format.</p>
-      </div>
+      </a>
     </div>
-  </a>
+  </section>
+  <!-- Finance Tools Section -->
+  <section class="section" id="finance-tools">
+    <h2 class="finance-tools-heading">FINANCE TOOLS</h2>
+    <div class="finance-tools-grid">
+      <!-- Income Tax Calculator -->
+      <a href="#" class="tool-link">
+        <div class="finance-tool-card">
+          <div class="finance-tool-icon">
+            <i class="fas fa-money-check-alt"></i>
+          </div>
+          <h3>Income Tax Calculator</h3>
+          <p>Estimate your income tax liability based on income and deductions.</p>
+        </div>
+      </a>
+      <!-- SIP Calculator -->
+      <a href="#" class="tool-link">
+        <div class="finance-tool-card">
+          <div class="finance-tool-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>SIP Calculator</h3>
+          <p>Calculate returns on your Systematic Investment Plan (SIP).</p>
+        </div>
+      </a>
+      <!-- EMI Calculator -->
+      <a href="#" class="tool-link">
+        <div class="finance-tool-card">
+          <div class="finance-tool-icon">
+            <i class="fas fa-calculator"></i>
+          </div>
+          <h3>EMI Calculator</h3>
+          <p>Compute monthly loan payments and interest for EMIs.</p>
+        </div>
+      </a>
+      <!-- GST Calculator -->
+      <a href="#" class="tool-link">
+        <div class="finance-tool-card">
+          <div class="finance-tool-icon">
+            <i class="fas fa-file-invoice"></i>
+          </div>
+          <h3>GST Calculator</h3>
+          <p>Calculate Goods and Services Tax (GST) for your transactions.</p>
+        </div>
+      </a>
+    </div>
   </section>
   <!-- Footer Section -->
   <footer class="section" id="footer">
@@ -775,6 +822,7 @@
         <a href="privacy-policy.html">Privacy Policy</a>
         <a href="contact-us.html">Contact Us</a>
         <a href="disclaimer.html">Disclaimer</a>
+        
       </div>
       <p style="margin-top: 20px; font-size: 14px; opacity: 0.7;">
         &copy; 2025 Nova Tools. All rights reserved.
@@ -848,10 +896,11 @@
     
     const navLinks = document.querySelectorAll('.navbar a');
     navLinks.forEach(link => {
-      link.addEventListener('click', function() {
+      link.addEventListener('click', function(e) {
         closeMenu();
         const targetId = this.getAttribute('href');
         if (targetId.startsWith('#')) {
+          e.preventDefault();
           const targetSection = document.querySelector(targetId);
           if (targetSection) {
             window.scrollTo({
@@ -922,6 +971,7 @@
     // Smooth Card Animation on Load
     const toolCards = document.querySelectorAll('.tool-card');
     const pdfToolCards = document.querySelectorAll('.pdf-tool-card');
+    const financeToolCards = document.querySelectorAll('.finance-tool-card');
     window.addEventListener('load', () => {
       toolCards.forEach((card, index) => {
         setTimeout(() => {
@@ -934,10 +984,26 @@
           card.classList.add('show');
         }, index * 200 + 600);
       });
+
+      financeToolCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('show');
+        }, index * 200 + 600);
+      });
     });
 
-    // Handle PDF Tool Card Clicks (No Modal Opening)
+    // Handle Tool Card Clicks (No Modal Opening)
     pdfToolCards.forEach(card => {
+      card.addEventListener('click', () => {
+        // Do nothing or add a visual feedback like a brief animation
+        card.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+          card.style.transform = 'scale(1)';
+        }, 200);
+      });
+    });
+
+    financeToolCards.forEach(card => {
       card.addEventListener('click', () => {
         // Do nothing or add a visual feedback like a brief animation
         card.style.transform = 'scale(1.05)';
