@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Read the Disclaimer for Nova Tools, outlining the limitations of liability and usage terms for our website and services.">
+  <meta name="keywords" content="Disclaimer, Nova Tools, liability, website usage, legal notice">
+  <meta name="robots" content="index, follow">
+  <title>Disclaimer - Nova Tools</title>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-primary: #0d0d0d;
+      --bg-secondary: rgba(255, 255, 255, 0.05);
+      --text-primary: white;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+      --accent-color: #ff00cc;
+      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --card-bg: rgba(255, 255, 255, 0.1);
+      --border-color: rgba(255, 255, 255, 0.3);
+      --nav-bg: rgba(0, 0, 0, 0.8);
+      --particle-color: #ffffff;
+      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0f0f0;
+      --bg-secondary: rgba(0, 0, 0, 0.05);
+      --text-primary: #0d0d0d;
+      --text-secondary: rgba(0, 0, 0, 0.85);
+      --accent-color: #ff00cc;
+      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --card-bg: rgba(0, 0, 0, 0.1);
+      --border-color: rgba(0, 0, 0, 0.3);
+      --nav-bg: rgba(255, 255, 255, 0.8);
+      --particle-color: #000000;
+      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      width: 50px;
+      height: 24px;
+      background: var(--card-bg);
+      border-radius: 50px;
+      padding: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      margin-left: 15px;
+    }
+    
+    .theme-toggle::before {
+      content: '';
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+      left: 0;
+    }
+    
+    [data-theme="light"] .theme-toggle::before {
+      transform: translateX(26px);
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(5px);
+      padding: 15px 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.5s ease;
+    }
+    
+    .nav-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+    
+    .logo {
+      color: var(--text-primary);
+      font-weight: bold;
+      font-size: 20px;
+      transition: color 0.5s ease;
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+    
+    .navbar li {
+      position: relative;
+    }
+    
+    .navbar a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 8px 15px;
+      border-radius: 20px;
+      transition: color 0.3s ease, transform 0.3s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .navbar a:hover {
+      color: var(--accent-color);
+    }
+    
+    .navbar a::before {
+      content: '→';
+      opacity: 0;
+      margin-right: 5px;
+      transition: opacity 0.3s ease;
+    }
+    
+    .navbar a:hover::before {
+      opacity: 1;
+    }
+    
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    
+    .navbar a:hover::after {
+      width: 100%;
+      left: 0;
+    }
+    
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(5px);
+      border-radius: 10px;
+      padding: 10px 0;
+      min-width: 200px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 14px;
+      text-align: left;
+      border-radius: 0;
+    }
+    
+    .dropdown-menu a::after {
+      bottom: 0;
+    }
+    
+    /* Mobile Menu Button */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 25px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 10;
+    }
+    
+    .menu-toggle span {
+      width: 100%;
+      height: 3px;
+      background: var(--text-primary);
+      border-radius: 5px;
+      transition: all 0.3s linear;
+      position: relative;
+      transform-origin: center;
+    }
+    
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+        margin-left: 15px;
+      }
+      
+      .nav-right ul {
+        position: fixed;
+        left: 0;
+        top: 0;
+        flex-direction: column;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        width: 70%;
+        height: 100vh;
+        padding: 80px 20px 20px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 9;
+        gap: 10px;
+      }
+      
+      .nav-right ul.active {
+        transform: translateX(0);
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+      }
+      
+      .navbar a {
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 18px;
+        justify-content: flex-start;
+      }
+      
+      .navbar a:hover {
+        background: rgba(255, 0, 204, 0.1);
+      }
+      
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 8px);
+      }
+      
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -8px);
+      }
+      
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 8;
+      }
+      
+      .overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      
+      .theme-toggle {
+        margin-left: 0;
+        width: 45px;
+        height: 22px;
+        margin-right: 15px;
+      }
+      
+      .theme-toggle::before {
+        width: 18px;
+        height: 18px;
+      }
+      
+      [data-theme="light"] .theme-toggle::before {
+        transform: translateX(23px);
+      }
+      
+      /* Mobile Dropdown Styles */
+      .dropdown-menu {
+        position: static;
+        display: none;
+        background: transparent;
+        box-shadow: none;
+        padding: 10px 20px;
+      }
+      
+      .dropdown.active .dropdown-menu {
+        display: block;
+      }
+      
+      .dropdown-menu a {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    }
+
+    /* Particles Background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    /* Falling Pepper (Confetti) */
+    .pepper {
+      position: fixed;
+      top: -10px;
+      width: 8px;
+      height: 8px;
+      background: var(--accent-color);
+      opacity: 0.8;
+      border-radius: 2px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    /* Disclaimer Section */
+    .disclaimer-section {
+      padding: 100px 20px 60px;
+      background: var(--bg-secondary);
+      z-index: 2;
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .disclaimer-section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .disclaimer-section h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .disclaimer-section h1::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: var(--accent-color);
+      margin: 10px auto 0;
+    }
+    .disclaimer-section h2 {
+      font-size: 24px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+    }
+    .disclaimer-section p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    .disclaimer-section ul {
+      list-style: disc;
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+    .disclaimer-section li {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+    .disclaimer-section a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+    .disclaimer-section a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .disclaimer-section h1 {
+        font-size: 28px;
+      }
+      .disclaimer-section h2 {
+        font-size: 20px;
+      }
+      .disclaimer-section p, .disclaimer-section li {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particles -->
+  <div id="particles-js"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh69rlCA3VUszqOQVdIfbVHjGCjhKDh46XWYjUnrpM-f99Xb2f0nlkHcbRekr36LAkYTjGMKk-Oq-_e5Fu9UkRQTcW1vuyDTejMhCstBF9_0BRZ1CB9lylUwnFO7mGVRDURkAwxsAWdjGnt9gLWI8VcgUKPQ2d1YwJdf4wNBu-VqScVud5yPwx5RoVsyXPa/s320/akiii.png.jpg" 
+        alt="Logo" style="height:30px; vertical-align:middle; margin-right:8px;">
+        Nova Tools
+      </div>
+      
+      <div class="nav-right">
+        <ul id="navMenu">
+          <li><a href="#home">HOME</a></li>
+          <li class="dropdown">
+            <a href="#tools">TOOLS</a>
+            <div class="dropdown-menu">
+              <a href="#pdf-tools">PDF TOOLS</a>
+            </div>
+          </li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#how-to-use">HOW TO USE</a></li>
+          <li><a href="#about">ABOUT US</a></li>
+          
+        </ul>
+        
+        <!-- Theme Toggle -->
+        <div class="theme-toggle" id="themeToggle"></div>
+      </div>
+      
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Overlay for mobile menu -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Disclaimer Section -->
+  <section class="disclaimer-section" id="disclaimer">
+    <h1>Disclaimer</h1>
+    <p>Last Updated: September 15, 2025</p>
+    
+    <h2>1. General Information</h2>
+    <p>The information provided on the Nova Tools website ("Website") is for general informational purposes only. While we strive to ensure that the information is accurate and up-to-date, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, services, or related graphics contained on the Website.</p>
+    
+    <h2>2. Use at Your Own Risk</h2>
+    <p>Your use of the Website and its services, including any tools or content provided, is at your own risk. Nova Tools does not guarantee that the Website will be error-free, secure, or uninterrupted. We are not responsible for any damage or loss resulting from your use of the Website, including but not limited to data loss, computer viruses, or other harmful components.</p>
+    
+    <h2>3. No Professional Advice</h2>
+    <p>The content on the Website is not intended to constitute professional advice, including but not limited to legal, financial, or technical advice. You should consult with a qualified professional for advice tailored to your specific circumstances.</p>
+    
+    <h2>4. Third-Party Links</h2>
+    <p>The Website may contain links to third-party websites or services that are not owned or controlled by Nova Tools. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites. You access these links at your own risk.</p>
+    
+    <h2>5. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, Nova Tools, its affiliates, and its service providers shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising from your use of the Website or reliance on its content. This includes, but is not limited to, damages for loss of profits, data, or other intangible losses.</p>
+    
+    <h2>6. User-Generated Content</h2>
+    <p>Any files or content you upload to the Website are your responsibility. Nova Tools does not endorse or guarantee the accuracy, legality, or safety of user-generated content. You are solely responsible for ensuring that your content complies with applicable laws and does not infringe on any third-party rights.</p>
+    
+    <h2>7. Changes to the Website</h2>
+    <p>We reserve the right to modify, suspend, or discontinue any part of the Website or its services at any time without prior notice. We are not liable for any consequences arising from such changes.</p>
+    
+    <h2>8. Governing Law</h2>
+    <p>This Disclaimer is governed by the laws of [Your Country/State]. Any disputes arising from this Disclaimer will be resolved in the courts of [Your Jurisdiction].</p>
+    
+    <h2>9. Contact Us</h2>
+    <p>If you have any questions about this Disclaimer, please <a href="CONTACT US">CONTACT US</a>.</p>
+  </section>
+
+  <script>
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    const savedTheme = localStorage.getItem('theme') || 
+                      (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    
+    body.setAttribute('data-theme', savedTheme);
+    updateParticles(savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateParticles(newTheme);
+    });
+    
+    function updateParticles(theme) {
+      const particlesConfig = {
+        "particles": {
+          "number": {"value": 120},
+          "size": {"value": 2},
+          "move": {
+            "speed": 1.2,
+            "direction": "none",
+            "random": true
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 120,
+            "color": theme === 'dark' ? "#ffffff" : "#000000",
+            "opacity": 0.4,
+            "width": 1
+          },
+          "color": {"value": theme === 'dark' ? "#ffffff" : "#000000"},
+          "opacity": {"value": 0.6}
+        },
+        "interactivity": {
+          "events": {
+            "onhover": {"enable": false},
+            "onclick": {"enable": false}
+          }
+        }
+      };
+      
+      if (typeof particlesJS !== 'undefined') {
+        particlesJS("particles-js", particlesConfig);
+      }
+    }
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const overlay = document.getElementById('overlay');
+    
+    menuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+    
+    overlay.addEventListener('click', closeMenu);
+    
+    const navLinks = document.querySelectorAll('.navbar a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        closeMenu();
+        const targetId = this.getAttribute('href');
+        if (targetId.startsWith('#')) {
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            window.scrollTo({
+              top: targetSection.offsetTop - 70,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+    
+    function closeMenu() {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.classList.remove('active');
+      });
+    }
+    
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        closeMenu();
+      }
+    });
+
+    // Dropdown Toggle for Mobile
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          this.classList.toggle('active');
+        }
+      });
+    });
+
+    // Continuous Falling Pepper
+    function createPepper() {
+      const pepper = document.createElement('div');
+      pepper.classList.add('pepper');
+      pepper.style.left = Math.random() * window.innerWidth + "px";
+      const theme = body.getAttribute('data-theme');
+      const colors = theme === 'dark' 
+        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
+        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+      pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
+      pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
+      document.body.appendChild(pepper);
+      setTimeout(() => { pepper.remove(); }, 10000);
+    }
+    setInterval(createPepper, 300);
+
+    // Smooth Section Animation on Scroll
+    const sections = document.querySelectorAll('.disclaimer-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
