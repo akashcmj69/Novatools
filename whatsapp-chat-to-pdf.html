@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Tools - WhatsApp Chat to PDF</title>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/pdf-lib@1.17.0/dist/pdf-lib.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-primary: #0d0d0d;
+      --bg-secondary: rgba(255, 255, 255, 0.05);
+      --text-primary: white;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+      --accent-color: #ff00cc;
+      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --card-bg: rgba(255, 255, 255, 0.1);
+      --border-color: rgba(255, 255, 255, 0.3);
+      --nav-bg: rgba(0, 0, 0, 0.8);
+      --particle-color: #ffffff;
+      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+      --modal-bg: #1a1a1a;
+      --modal-border: rgba(255, 0, 200, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
+      --download-btn-glow: rgba(255, 0, 200, 0.6);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0f0f0;
+      --bg-secondary: rgba(0, 0, 0, 0.05);
+      --text-primary: #0d0d0d;
+      --text-secondary: rgba(0, 0, 0, 0.85);
+      --accent-color: #ff00cc;
+      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --card-bg: rgba(0, 0, 0, 0.1);
+      --border-color: rgba(0, 0, 0, 0.3);
+      --nav-bg: rgba(255, 255, 255, 0.8);
+      --particle-color: #000000;
+      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+      --modal-bg: #f5f5f5;
+      --modal-border: rgba(255, 0, 200, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
+      --download-btn-glow: rgba(255, 0, 200, 0.4);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      width: 50px;
+      height: 24px;
+      background: var(--card-bg);
+      border-radius: 50px;
+      padding: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      margin-left: 15px;
+    }
+    
+    .theme-toggle::before {
+      content: '';
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+      left: 0;
+    }
+    
+    [data-theme="light"] .theme-toggle::before {
+      transform: translateX(26px);
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(5px);
+      padding: 15px 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.5s ease;
+    }
+    
+    .nav-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+    
+    .logo {
+      color: var(--text-primary);
+      font-weight: bold;
+      font-size: 20px;
+      transition: color 0.5s ease;
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+    
+    .navbar li {
+      position: relative;
+    }
+    
+    .navbar a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 8px 15px;
+      border-radius: 20px;
+      transition: color 0.3s ease, transform 0.3s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .navbar a:hover {
+      color: var(--accent-color);
+    }
+    
+    .navbar a::before {
+      content: '→';
+      opacity: 0;
+      margin-right: 5px;
+      transition: opacity 0.3s ease;
+    }
+    
+    .navbar a:hover::before {
+      opacity: 1;
+    }
+    
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    
+    .navbar a:hover::after {
+      width: 100%;
+      left: 0;
+    }
+    
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(5px);
+      border-radius: 10px;
+      padding: 10px 0;
+      min-width: 200px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 14px;
+      text-align: left;
+      border-radius: 0;
+    }
+    
+    .dropdown-menu a::after {
+      bottom: 0;
+    }
+    
+    /* Mobile Menu Button */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 25px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 10;
+    }
+    
+    .menu-toggle span {
+      width: 100%;
+      height: 3px;
+      background: var(--text-primary);
+      border-radius: 5px;
+      transition: all 0.3s linear;
+      position: relative;
+      transform-origin: center;
+    }
+    
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+        margin-left: 15px;
+      }
+      
+      .nav-right ul {
+        position: fixed;
+        left: 0;
+        top: 0;
+        flex-direction: column;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        width: 70%;
+        height: 100vh;
+        padding: 80px 20px 20px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 9;
+        gap: 10px;
+      }
+      
+      .nav-right ul.active {
+        transform: translateX(0);
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+      }
+      
+      .navbar a {
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 18px;
+        justify-content: flex-start;
+      }
+      
+      .navbar a:hover {
+        background: rgba(255, 0, 204, 0.1);
+      }
+      
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 8px);
+      }
+      
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -8px);
+      }
+      
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 8;
+      }
+      
+      .overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      
+      .theme-toggle {
+        margin-left: 0;
+        width: 45px;
+        height: 22px;
+        margin-right: 15px;
+      }
+      
+      .theme-toggle::before {
+        width: 18px;
+        height: 18px;
+      }
+      
+      [data-theme="light"] .theme-toggle::before {
+        transform: translateX(23px);
+      }
+      
+      /* Mobile Dropdown Styles */
+      .dropdown-menu {
+        position: static;
+        display: none;
+        background: transparent;
+        box-shadow: none;
+        padding: 10px 20px;
+      }
+      
+      .dropdown.active .dropdown-menu {
+        display: block;
+      }
+      
+      .dropdown-menu a {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .hero.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      max-width: 600px;
+      font-size: 18px;
+      opacity: 0.85;
+      color: var(--text-secondary);
+      transition: color 0.5s ease;
+    }
+
+    .btn {
+      margin-top: 25px;
+      padding: 12px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      background: var(--accent-gradient);
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0px 0px 15px rgba(255, 0, 200, 0.5);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 0px 25px rgba(255, 0, 200, 0.9);
+    }
+
+    /* Particles Background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    /* Falling Pepper (Confetti) */
+    .pepper {
+      position: fixed;
+      top: -10px;
+      width: 8px;
+      height: 8px;
+      background: var(--accent-color);
+      opacity: 0.8;
+      border-radius: 2px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    /* Tools Section */
+    .section {
+      padding: 60px 20px;
+      background: var(--bg-secondary);
+      z-index: 2;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .section h2 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    #tools h2::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: var(--accent-color);
+      margin: 10px auto 0;
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .tool-card {
+      background: var(--card-bg);
+      padding: 30px 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .tool-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .tool-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .tool-card h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+    }
+    .tool-card p {
+      font-size: 16px;
+      opacity: 0.7;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .tool-icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: #ff00cc;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Modal Popup */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      background: var(--modal-bg);
+      width: 90%;
+      max-width: 600px;
+      border-radius: 15px;
+      padding: 30px;
+      position: relative;
+      box-shadow: 0 0 35px rgba(255, 0, 200, 0.5);
+      border: 1px solid var(--modal-border);
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    
+    .close-btn:hover {
+      color: #ff00cc;
+    }
+    
+    .modal-title {
+      font-size: 28px;
+      margin-bottom: 25px;
+      color: var(--text-primary);
+    }
+    
+    /* Upload area */
+    .modal-upload-area {
+      border: 2px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 40px 20px;
+      margin-bottom: 25px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      background: var(--modal-bg);
+    }
+    
+    .modal-upload-icon {
+      font-size: 50px;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+    }
+    
+    .modal-upload-text {
+      color: var(--text-secondary);
+      font-size: 18px;
+    }
+    
+    .modal-upload-hint {
+      color: var(--text-secondary);
+      opacity: 0.5;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    #selectedFileName {
+      display: block;
+      margin-top: 10px;
+      font-size: 16px;
+      color: var(--accent-color);
+      word-wrap: break-word;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    
+    /* Action buttons */
+    .modal-action-btn {
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 35px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(255, 0, 200, 0.4);
+      margin-top: 15px;
+    }
+    
+    .modal-action-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255, 0, 200, 0.7);
+    }
+    
+    /* File list */
+    .file-list {
+      margin-top: 20px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    
+    .file-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+    
+    .file-name {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .file-size {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    
+    .file-remove {
+      color: #ff4d4d;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    
+    /* Progress bar */
+    .progress-container {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      margin: 15px 0;
+      overflow: hidden;
+      display: none;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: var(--accent-gradient);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    /* Download button */
+    .download-btn {
+      display: none;
+      background: var(--download-btn-bg);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 35px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 15px var(--download-btn-glow);
+      margin-top: 15px;
+    }
+    
+    .download-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px var(--download-btn-glow);
+    }
+    
+    .download-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+    
+    .download-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .download-btn i {
+      margin-right: 8px;
+      transition: transform 0.3s ease;
+    }
+    
+    .download-btn:hover i {
+      transform: translateX(5px);
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 var(--download-btn-glow); }
+      50% { box-shadow: 0 0 20px 10px transparent; }
+      100% { box-shadow: 0 0 0 0 var(--download-btn-glow); }
+    }
+    
+    .download-btn.pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 32px;
+      }
+      p {
+        font-size: 16px;
+      }
+      
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-container {
+        flex-wrap: nowrap;
+      }
+      
+      .logo {
+        flex: 1;
+      }
+      
+      .modal-content {
+        padding: 20px;
+      }
+    }
+
+    /* Styles for number of images dropdown */
+    .image-count-select {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      width: 80px;
+      margin: 15px auto;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .image-count-select:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 5px var(--download-btn-glow);
+    }
+  </style>
+</head>
+<body>
+  <!-- Particles -->
+  <div id="particles-js"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh69rlCA3VUszqOQVdIfbVHjGCjhKDh46XWYjUnrpM-f99Xb2f0nlkHcbRekr36LAkYTjGMKk-Oq-_e5Fu9UkRQTcW1vuyDTejMhCstBF9_0BRZ1CB9lylUwnFO7mGVRDURkAwxsAWdjGnt9gLWI8VcgUKPQ2d1YwJdf4wNBu-VqScVud5yPwx5RoVsyXPa/s320/akiii.png.jpg" 
+        alt="Logo" style="height:30px; vertical-align:middle; margin-right:8px;">
+        Nova Tools
+      </div>
+      
+      <div class="nav-right">
+        <ul id="navMenu">
+          <li><a href="#home">HOME</a></li>
+          <li class="dropdown">
+            <a href="#tools">TOOLS</a>
+            <div class="dropdown-menu">
+              <a href="#pdf-tools">PDF TOOLS</a>
+            </div>
+          </li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#how-to-use">HOW TO USE</a></li>
+          <li><a href="#about">ABOUT US</a></li>
+        </ul>
+        
+        <!-- Theme Toggle -->
+        <div class="theme-toggle" id="themeToggle"></div>
+      </div>
+      
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Overlay for mobile menu -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Tools Section -->
+  <section class="section" id="tools">
+    <h2>WHATSAPP CHAT TO PDF</h2>
+    <div class="tools-grid">
+      <div class="tool-card" onclick="openPdfModal('whatsapp-chat-to-pdf')">
+        <div class="tool-icon">
+          <i class="fab fa-whatsapp"></i>
+        </div>
+        <h3>WhatsApp Chat to PDF</h3>
+        <center><p>Convert your WhatsApp chat screenshot to a PDF document.</p></center>
+      </div>
+    </div>
+  </section>
+
+  <!-- PDF Tools Modal -->
+  <div class="modal" id="pdfModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closePdfModal()">&times;</span>
+      <h2 class="modal-title" id="pdfModalTitle">Convert WhatsApp Chat Screenshot to PDF</h2>
+      
+      <div class="modal-upload-area" id="uploadArea">
+        <div class="modal-upload-icon">
+          <i class="fas fa-cloud-upload-alt"></i>
+        </div>
+        <p class="modal-upload-text">
+          <label for="fileInput" style="cursor: pointer; color:#000000;">Choose Image File</label>
+        </p>
+        <span id="selectedFileName">No file chosen</span>
+        <p class="modal-upload-hint" id="uploadHint">Select WhatsApp chat screenshot(s) (.png, .jpg, .jpeg)</p>
+        <input type="file" id="fileInput" accept="image/png,image/jpeg" multiple>
+      </div>
+      
+      <!-- File list -->
+      <div class="file-list" id="fileList"></div>
+      
+      <!-- Number of images dropdown -->
+      <select id="imageCount" class="image-count-select">
+        <option value="1">1</option>
+        <option value="2">2</option>
+      </select>
+      
+      <!-- Progress bar -->
+      <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      
+      <button class="modal-action-btn" id="processBtn">Convert to PDF</button>
+      <a class="download-btn" id="downloadBtn" download><i class="fas fa-download"></i> Download PDF</a>
+    </div>
+  </div>
+
+  <script>
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    const savedTheme = localStorage.getItem('theme') || 
+                      (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    
+    body.setAttribute('data-theme', savedTheme);
+    updateParticles(savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateParticles(newTheme);
+    });
+    
+    function updateParticles(theme) {
+      const particlesConfig = {
+        "particles": {
+          "number": {"value": 120},
+          "size": {"value": 2},
+          "move": {
+            "speed": 1.2,
+            "direction": "none",
+            "random": true
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 120,
+            "color": theme === 'dark' ? "#ffffff" : "#000000",
+            "opacity": 0.4,
+            "width": 1
+          },
+          "color": {"value": theme === 'dark' ? "#ffffff" : "#000000"},
+          "opacity": {"value": 0.6}
+        },
+        "interactivity": {
+          "events": {
+            "onhover": {"enable": false},
+            "onclick": {"enable": false}
+          }
+        }
+      };
+      
+      if (typeof particlesJS !== 'undefined') {
+        particlesJS("particles-js", particlesConfig);
+      }
+    }
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const overlay = document.getElementById('overlay');
+    
+    menuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+    
+    overlay.addEventListener('click', closeMenu);
+    
+    const navLinks = document.querySelectorAll('.navbar a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        closeMenu();
+        const targetId = this.getAttribute('href');
+        if (targetId.startsWith('#')) {
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            window.scrollTo({
+              top: targetSection.offsetTop - 70,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+    
+    function closeMenu() {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.classList.remove('active');
+      });
+    }
+    
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        closeMenu();
+      }
+    });
+
+    // Dropdown Toggle for Mobile
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          this.classList.toggle('active');
+        }
+      });
+    });
+
+    // Continuous Falling Pepper
+    function createPepper() {
+      const pepper = document.createElement('div');
+      pepper.classList.add('pepper');
+      pepper.style.left = Math.random() * window.innerWidth + "px";
+      const theme = body.getAttribute('data-theme');
+      const colors = theme === 'dark' 
+        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
+        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+      pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
+      pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
+      document.body.appendChild(pepper);
+      setTimeout(() => { pepper.remove(); }, 10000);
+    }
+    setInterval(createPepper, 300);
+
+    // Smooth Section Animation on Scroll
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Smooth Card Animation on Load
+    const toolCards = document.querySelectorAll('.tool-card');
+    window.addEventListener('load', () => {
+      toolCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('show');
+        }, index * 200);
+      });
+    });
+
+    // WhatsApp Chat Screenshot to PDF Modal Functions
+    let currentTool = '';
+    let uploadedFiles = [];
+    
+    const selectedFileNameDisplay = document.getElementById('selectedFileName');
+    const imageCountSelect = document.getElementById('imageCount');
+    
+    function openPdfModal(tool) {
+      currentTool = tool;
+      resetModal();
+      
+      document.getElementById('pdfModalTitle').textContent = 'Convert WhatsApp Chat Screenshot to PDF';
+      document.getElementById('uploadHint').textContent = `Select ${imageCountSelect.value} WhatsApp chat screenshot(s) (.png, .jpg, .jpeg)`;
+      
+      document.getElementById('pdfModal').classList.add('active');
+      document.getElementById('downloadBtn').classList.add('pulse');
+    }
+    
+    function closePdfModal() {
+      document.getElementById('pdfModal').classList.remove('active');
+      document.getElementById('downloadBtn').classList.remove('pulse');
+      resetModal();
+    }
+    
+    function resetModal() {
+      uploadedFiles = [];
+      document.getElementById('fileList').innerHTML = '';
+      document.getElementById('uploadArea').classList.remove('active');
+      document.getElementById('progressContainer').style.display = 'none';
+      document.getElementById('progressBar').style.width = '0%';
+      document.getElementById('processBtn').style.display = 'block';
+      document.getElementById('downloadBtn').style.display = 'none';
+      document.getElementById('fileInput').value = '';
+      selectedFileNameDisplay.textContent = 'No file chosen';
+      imageCountSelect.value = '1';
+      updateUploadHint();
+    }
+    
+    function updateUploadHint() {
+      document.getElementById('uploadHint').textContent = `Select ${imageCountSelect.value} WhatsApp chat screenshot(s) (.png, .jpg, .jpeg)`;
+    }
+    
+    window.addEventListener('click', function(event) {
+      const pdfModal = document.getElementById('pdfModal');
+      if (event.target === pdfModal) {
+        closePdfModal();
+      }
+    });
+    
+    // File upload handling
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const fileList = document.getElementById('fileList');
+    const processBtn = document.getElementById('processBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    
+    imageCountSelect.addEventListener('change', () => {
+      updateUploadHint();
+      if (uploadedFiles.length > parseInt(imageCountSelect.value)) {
+        uploadedFiles = uploadedFiles.slice(0, parseInt(imageCountSelect.value));
+        updateFileList();
+      }
+    });
+    
+    uploadArea.addEventListener('click', (e) => {
+      if (e.target !== fileInput) {
+        fileInput.click();
+      }
+    });
+    
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.classList.add('active');
+    });
+    
+    uploadArea.addEventListener('dragleave', () => {
+      if (uploadedFiles.length === 0) {
+        uploadArea.classList.remove('active');
+      }
+    });
+    
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('active');
+      if (e.dataTransfer.files.length > 0) {
+        handleFiles(e.dataTransfer.files);
+      }
+    });
+    
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length > 0) {
+        handleFiles(fileInput.files);
+      }
+    });
+    
+    function handleFiles(files) {
+      const maxFiles = parseInt(imageCountSelect.value);
+      const filesToAdd = [];
+    
+      // Only add new files if they are valid and don't exceed the limit
+      for (let i = 0; i < files.length && uploadedFiles.length + filesToAdd.length < maxFiles; i++) {
+        const file = files[i];
+        if (['image/png', 'image/jpeg'].includes(file.type) && !uploadedFiles.some(f => f.name === file.name && f.size === file.size)) {
+          filesToAdd.push(file);
+        }
+      }
+    
+      // Append new files to existing uploadedFiles
+      uploadedFiles = [...uploadedFiles, ...filesToAdd];
+      updateFileList();
+      
+      if (uploadedFiles.length > 0) {
+        selectedFileNameDisplay.textContent = `Selected: ${uploadedFiles.map(f => f.name).join(', ')}`;
+        uploadArea.classList.add('active');
+      } else {
+        uploadArea.classList.remove('active');
+        selectedFileNameDisplay.textContent = 'No file chosen';
+      }
+    
+      // Alert if too many files are selected
+      if (files.length > maxFiles - uploadedFiles.length + filesToAdd.length) {
+        alert(`Please select up to ${maxFiles} image(s). Only ${filesToAdd.length} valid image(s) have been added.`);
+      }
+    }
+    
+    function formatFileSize(size) {
+      if (size < 1024) return size + ' B';
+      if (size < 1024 * 1024) return (size / 1024).toFixed(2) + ' KB';
+      return (size / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+    
+    function addFileToList(file, index) {
+      const fileItem = document.createElement('div');
+      fileItem.className = 'file-item';
+      fileItem.innerHTML = `
+        <div class="file-name">${file.name}</div>
+        <div class="file-size">${formatFileSize(file.size)}</div>
+        <div class="file-remove" onclick="removeFile(${index})">
+          <i class="fas fa-times"></i>
+        </div>
+      `;
+      fileList.appendChild(fileItem);
+    }
+    
+    function removeFile(index) {
+      uploadedFiles.splice(index, 1);
+      updateFileList();
+    }
+    
+    function updateFileList() {
+      fileList.innerHTML = '';
+      uploadedFiles.forEach((file, index) => {
+        addFileToList(file, index);
+      });
+      
+      if (uploadedFiles.length === 0) {
+        uploadArea.classList.remove('active');
+        selectedFileNameDisplay.textContent = 'No file chosen';
+      } else {
+        selectedFileNameDisplay.textContent = `Selected: ${uploadedFiles.map(f => f.name).join(', ')}`;
+      }
+    }
+    
+    processBtn.addEventListener('click', async () => {
+      const maxFiles = parseInt(imageCountSelect.value);
+      if (uploadedFiles.length !== maxFiles) {
+        alert(`Please select exactly ${maxFiles} WhatsApp chat screenshot(s) (.png, .jpg, .jpeg)`);
+        return;
+      }
+      
+      progressContainer.style.display = 'block';
+      processBtn.disabled = true;
+      
+      try {
+        const result = await convertImagesToPdf();
+        progressBar.style.width = '100%';
+        processBtn.style.display = 'none';
+        downloadBtn.style.display = 'block';
+        downloadBtn.href = result;
+        downloadBtn.download = 'whatsapp_chat_screenshot.pdf';
+        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
+      } catch (error) {
+        console.error('Error converting images to PDF:', error);
+        alert('Error converting images to PDF: ' + error.message);
+        processBtn.disabled = false;
+        progressBar.style.width = '0%';
+        progressContainer.style.display = 'none';
+      }
+    });
+    
+    function updateProgress(percent) {
+      progressBar.style.width = percent + '%';
+    }
+    
+    async function convertImagesToPdf() {
+      const { PDFDocument } = PDFLib;
+      const pdfDoc = await PDFDocument.create();
+      const page = pdfDoc.addPage();
+      const { width, height } = page.getSize();
+      const margin = 20;
+      let currentY = height - margin;
+      
+      if (uploadedFiles.length === 1) {
+        // Single image: place on the page
+        const file = uploadedFiles[0];
+        const imageBytes = await readFileAsArrayBuffer(file);
+        let image;
+        if (file.type === 'image/png') {
+          image = await pdfDoc.embedPng(imageBytes);
+        } else if (file.type === 'image/jpeg') {
+          image = await pdfDoc.embedJpg(imageBytes);
+        }
+        
+        const imageDims = image.scaleToFit(width - 2 * margin, height - 2 * margin);
+        page.drawImage(image, {
+          x: margin,
+          y: height - imageDims.height - margin,
+          width: imageDims.width,
+          height: imageDims.height,
+        });
+        
+        updateProgress(100);
+      } else if (uploadedFiles.length === 2) {
+        // Two images: stack vertically on the same page
+        const maxHeightPerImage = (height - 3 * margin) / 2; // Divide available height, account for margin between images
+        for (let i = 0; i < uploadedFiles.length; i++) {
+          const file = uploadedFiles[i];
+          const imageBytes = await readFileAsArrayBuffer(file);
+          let image;
+          if (file.type === 'image/png') {
+            image = await pdfDoc.embedPng(imageBytes);
+          } else if (file.type === 'image/jpeg') {
+            image = await pdfDoc.embedJpg(imageBytes);
+          }
+          
+          const imageDims = image.scaleToFit(width - 2 * margin, maxHeightPerImage);
+          page.drawImage(image, {
+            x: margin,
+            y: currentY - imageDims.height,
+            width: imageDims.width,
+            height: imageDims.height,
+          });
+          
+          currentY -= (imageDims.height + margin); // Move Y position down for the next image
+          updateProgress(((i + 1) / uploadedFiles.length) * 100);
+        }
+      }
+      
+      const pdfBytes = await pdfDoc.save();
+      return URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
+    }
+    
+    function readFileAsArrayBuffer(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(file);
+      });
+    }
+  </script>
+</body>
+</html>
