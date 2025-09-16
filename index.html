@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Nova Tools offers a variety of PDF, Finance, and Image tools for seamless document management, financial calculations, and image processing. Explore our free tools today!">
-  <meta name="keywords" content="Nova Tools, PDF tools, Finance tools, Image tools, document management, financial calculators, image processing, free tools, PDF conversion">
+  <meta name="description" content="Nova Tools offers a variety of PDF, Finance, Image, and Utility tools for seamless document management, financial calculations, image processing, and text utilities. Explore our free tools today!">
+  <meta name="keywords" content="Nova Tools, PDF tools, Finance tools, Image tools, Utility tools, document management, financial calculators, image processing, text utilities, free tools, PDF conversion">
   <meta name="robots" content="index, follow">
   <title>Nova Tools - Landing Page</title>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -494,8 +494,8 @@
       opacity: 0.7;
     }
 
-    /* PDF Tools, Finance Tools, and Image Tools Heading */
-    .pdf-tools-heading, .finance-tools-heading, .image-tools-heading {
+    /* PDF Tools, Finance Tools, Image Tools, and Utility Tools Heading */
+    .pdf-tools-heading, .finance-tools-heading, .image-tools-heading, .utility-tools-heading {
       position: relative;
       display: block;
       text-align: center;
@@ -503,7 +503,7 @@
       width: 100%;
     }
 
-    .pdf-tools-heading::after, .finance-tools-heading::after, .image-tools-heading::after {
+    .pdf-tools-heading::after, .finance-tools-heading::after, .image-tools-heading::after, .utility-tools-heading::after {
       content: '';
       position: absolute;
       bottom: -15px;
@@ -515,8 +515,8 @@
       border-radius: 2px;
     }
 
-    /* PDF Tools, Finance Tools, and Image Tools Grid */
-    .pdf-tools-grid, .finance-tools-grid, .image-tools-grid {
+    /* PDF Tools, Finance Tools, Image Tools, and Utility Tools Grid */
+    .pdf-tools-grid, .finance-tools-grid, .image-tools-grid, .utility-tools-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
@@ -525,7 +525,7 @@
     }
 
     /* Tool cards */
-    .pdf-tool-card, .finance-tool-card, .image-tool-card {
+    .pdf-tool-card, .finance-tool-card, .image-tool-card, .utility-tool-card {
       background: var(--card-bg);
       border-radius: 12px;
       padding: 30px 20px;
@@ -534,13 +534,13 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
-    .pdf-tool-card:hover, .finance-tool-card:hover, .image-tool-card:hover {
+    .pdf-tool-card:hover, .finance-tool-card:hover, .image-tool-card:hover, .utility-tool-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
       background: rgba(255, 255, 255, 0.15);
     }
 
-    .pdf-tool-icon, .finance-tool-icon, .image-tool-icon {
+    .pdf-tool-icon, .finance-tool-icon, .image-tool-icon, .utility-tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
       color: #ff00cc;
@@ -550,13 +550,13 @@
       justify-content: center;
     }
 
-    .pdf-tool-card h3, .finance-tool-card h3, .image-tool-card h3 {
+    .pdf-tool-card h3, .finance-tool-card h3, .image-tool-card h3, .utility-tool-card h3 {
       font-size: 22px;
       margin-bottom: 15px;
       color: var(--text-primary);
     }
 
-    .pdf-tool-card p, .finance-tool-card p, .image-tool-card p {
+    .pdf-tool-card p, .finance-tool-card p, .image-tool-card p, .utility-tool-card p {
       color: var(--text-secondary);
       font-size: 16px;
       line-height: 1.5;
@@ -599,7 +599,7 @@
         font-size: 16px;
       }
       
-      .tools-grid, .pdf-tools-grid, .finance-tools-grid, .image-tools-grid {
+      .tools-grid, .pdf-tools-grid, .finance-tools-grid, .image-tools-grid, .utility-tools-grid {
         grid-template-columns: 1fr;
       }
       
@@ -642,6 +642,7 @@
               <a href="#pdf-tools">PDF TOOLS</a>
               <a href="#finance-tools">FINANCE TOOLS</a>
               <a href="#image-tools">IMAGE TOOLS</a>
+              <a href="#utility-tools">UTILITIES</a>
             </div>
           </li>
           <li><a href="#faq">FAQ</a></li>
@@ -663,7 +664,7 @@
   <!-- Content -->
   <section class="hero section" id="home">
     <h1>WELCOME TO NOVA TOOLS</h1>
-    <p>ALL-IN-ONE PDF, FINANCE, AND IMAGE TOOLS WITH DEMO STYLE FALLING PARTICLES & SLOW PEPPER EFFECT.</p>
+    <p>ALL-IN-ONE PDF, FINANCE, IMAGE, AND UTILITY TOOLS WITH DEMO STYLE FALLING PARTICLES & SLOW PEPPER EFFECT.</p>
     <button class="btn" onclick="document.getElementById('tools').scrollIntoView({behavior: 'smooth'})">EXPLORE ALL TOOLS</button>
   </section>
   <!-- Tools Section -->
@@ -843,6 +844,33 @@
       </a>
     </div>
   </section>
+  <!-- Utility Tools Section -->
+  <section class="section" id="utility-tools">
+    <h2 class="utility-tools-heading">UTILITY TOOLS</h2>
+    <div class="utility-tools-grid">
+      <div class="utility-tool-card">
+        <div class="utility-tool-icon">
+          <i class="fas fa-text-width"></i>
+        </div>
+        <h3>Word Counter</h3>
+        <p>Count the number of words in your text.</p>
+      </div>
+      <div class="utility-tool-card">
+        <div class="utility-tool-icon">
+          <i class="fas fa-font"></i>
+        </div>
+        <h3>Case Converter</h3>
+        <p>Convert text to uppercase or lowercase.</p>
+      </div>
+      <div class="utility-tool-card">
+        <div class="utility-tool-icon">
+          <i class="fas fa-clone"></i>
+        </div>
+        <h3>Remove Duplicate Lines</h3>
+        <p>Remove duplicate lines from your text input.</p>
+      </div>
+    </div>
+  </section>
   <!-- Footer Section -->
   <footer class="section" id="footer">
     <div class="footer-container" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px; text-align: center;">
@@ -1001,6 +1029,7 @@
     const pdfToolCards = document.querySelectorAll('.pdf-tool-card');
     const financeToolCards = document.querySelectorAll('.finance-tool-card');
     const imageToolCards = document.querySelectorAll('.image-tool-card');
+    const utilityToolCards = document.querySelectorAll('.utility-tool-card');
     window.addEventListener('load', () => {
       toolCards.forEach((card, index) => {
         setTimeout(() => {
@@ -1025,6 +1054,12 @@
           card.classList.add('show');
         }, index * 200 + 1200);
       });
+
+      utilityToolCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('show');
+        }, index * 200 + 1800);
+      });
     });
 
     // Handle Tool Card Clicks (No Modal Opening)
@@ -1047,6 +1082,15 @@
     });
 
     imageToolCards.forEach(card => {
+      card.addEventListener('click', () => {
+        card.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+          card.style.transform = 'scale(1)';
+        }, 200);
+      });
+    });
+
+    utilityToolCards.forEach(card => {
       card.addEventListener('click', () => {
         card.style.transform = 'scale(1.05)';
         setTimeout(() => {
