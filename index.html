@@ -24,34 +24,34 @@
       --bg-secondary: rgba(255, 255, 255, 0.05);
       --text-primary: white;
       --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: #FF00AA;
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(255, 255, 255, 0.1);
       --border-color: rgba(255, 255, 255, 0.3);
       --nav-bg: rgba(0, 0, 0, 0.8);
       --particle-color: #ffffff;
-      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+      --pepper-colors: #FF00AA, #00ffff, #ffffff, #0000FF;
       --modal-bg: #1a1a1a;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.6);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.6);
     }
     [data-theme="light"] {
       --bg-primary: #f0f0f0;
       --bg-secondary: rgba(0, 0, 0, 0.05);
       --text-primary: #0d0d0d;
       --text-secondary: rgba(0, 0, 0, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: #FF00AA;
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(0, 0, 0, 0.1);
       --border-color: rgba(0, 0, 0, 0.3);
       --nav-bg: rgba(255, 255, 255, 0.8);
       --particle-color: #000000;
-      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+      --pepper-colors: #FF00AA, #0077ff, #000000, #0000FF;
       --modal-bg: #f5f5f5;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.4);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.4);
     }
 
     body {
@@ -182,7 +182,7 @@
       left: 50%;
       width: 0;
       height: 2px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       transition: width 0.3s ease, left 0.3s ease;
     }
 
@@ -286,7 +286,7 @@
       }
       
       .navbar a:hover {
-        background: rgba(255, 0, 204, 0.1);
+        background: rgba(255, 0, 170, 0.1);
       }
       
       .menu-toggle.active span:nth-child(1) {
@@ -372,6 +372,7 @@
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.5s ease, transform 0.5s ease;
+      background: var(--accent-gradient);
     }
     .hero.show {
       opacity: 1;
@@ -401,13 +402,13 @@
       color: white;
       font-weight: bold;
       transition: 0.3s;
-      box-shadow: 0px 0px 15px rgba(255, 0, 200, 0.5);
+      box-shadow: 0px 0px 15px rgba(255, 0, 170, 0.5);
       cursor: pointer;
     }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0px 0px 25px rgba(255, 0, 200, 0.9);
+      box-shadow: 0px 0px 25px rgba(255, 0, 170, 0.9);
     }
 
     /* Particles Background */
@@ -481,7 +482,7 @@
     }
     .tool-card:hover {
       transform: scale(1.05);
-      box-shadow: 0px 0px 15px rgba(255, 0, 200, 0.5);
+      box-shadow: 0px 0px 15px rgba(255, 0, 170, 0.5);
     }
     .tool-card h3 {
       font-size: 20px;
@@ -511,7 +512,7 @@
       transform: translateX(-50%);
       width: 150px;
       height: 4px;
-      background-color: #ff00cc;
+      background: var(--accent-gradient);
       border-radius: 2px;
     }
 
@@ -536,14 +537,16 @@
 
     .pdf-tool-card:hover, .finance-tool-card:hover, .image-tool-card:hover, .utility-tool-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 8px 25px rgba(255, 0, 170, 0.4);
       background: rgba(255, 255, 255, 0.15);
     }
 
     .pdf-tool-icon, .finance-tool-icon, .image-tool-icon, .utility-tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
-      color: #ff00cc;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       height: 60px;
       display: flex;
       align-items: center;
@@ -708,7 +711,7 @@
         </div>
       </a>                                
       <!-- PDF to JPG -->
-      <a href="pdf-to-jpg.html" class="tool-link">                               
+      <a href="pdf-to-j Pg.html" class="tool-link">                               
         <div class="pdf-tool-card">
           <div class="pdf-tool-icon">
             <i class="fas fa-file-export"></i>
@@ -847,35 +850,35 @@
   <!-- Utility Tools Section -->
   <section class="section" id="utility-tools">
     <h2 class="utility-tools-heading">UTILITY TOOLS</h2>
-    <a href="word-counter.html" class="tool-link" aria-label="Background Remover Tool">
     <div class="utility-tools-grid">
-      <div class="utility-tool-card">
-        <div class="utility-tool-icon">
-          <i class="fas fa-text-width"></i>
+      <a href="word-counter.html" class="tool-link" aria-label="Word Counter Tool">
+        <div class="utility-tool-card">
+          <div class="utility-tool-icon">
+            <i class="fas fa-text-width"></i>
+          </div>
+          <h3>Word Counter</h3>
+          <p>Count the number of words in your text.</p>
         </div>
-        <h3>Word Counter</h3>
-        <p>Count the number of words in your text.</p>
-      </div>
-    </a>
-    <a href="case-converter.html" class="tool-link" aria-label="Background Remover Tool">
-      <div class="utility-tool-card">
-        <div class="utility-tool-icon">
-          <i class="fas fa-font"></i>
+      </a>
+      <a href="case-converter.html" class="tool-link" aria-label="Case Converter Tool">
+        <div class="utility-tool-card">
+          <div class="utility-tool-icon">
+            <i class="fas fa-font"></i>
+          </div>
+          <h3>Case Converter</h3>
+          <p>Convert text to uppercase or lowercase.</p>
         </div>
-        <h3>Case Converter</h3>
-        <p>Convert text to uppercase or lowercase.</p>
-      </div>
-    </a>
-     <a href="remove-duplicate-lines.html" class="tool-link" aria-label="Background Remover Tool">
-      <div class="utility-tool-card">
-        <div class="utility-tool-icon">
-          <i class="fas fa-clone"></i>
+      </a>
+      <a href="remove-duplicate-lines.html" class="tool-link" aria-label="Remove Duplicate Lines Tool">
+        <div class="utility-tool-card">
+          <div class="utility-tool-icon">
+            <i class="fas fa-clone"></i>
+          </div>
+          <h3>Remove Duplicate Lines</h3>
+          <p>Remove duplicate lines from your text input.</p>
         </div>
-        <h3>Remove Duplicate Lines</h3>
-        <p>Remove duplicate lines from your text input.</p>
-      </div>
+      </a>
     </div>
-     </a>
   </section>
   <!-- Footer Section -->
   <footer class="section" id="footer">
@@ -1007,8 +1010,8 @@
       pepper.style.left = Math.random() * window.innerWidth + "px";
       const theme = body.getAttribute('data-theme');
       const colors = theme === 'dark' 
-        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
-        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+        ? ["#FF00AA", "#00ffff", "#ffffff", "#0000FF"] 
+        : ["#FF00AA", "#0077ff", "#000000", "#0000FF"];
       pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
       pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(pepper);
