@@ -13,17 +13,17 @@
       --bg-secondary: rgba(255, 255, 255, 0.05);
       --text-primary: white;
       --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: #FF00AA;
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(255, 255, 255, 0.1);
       --border-color: rgba(255, 255, 255, 0.3);
       --nav-bg: rgba(0, 0, 0, 0.8);
       --particle-color: #ffffff;
-      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+      --pepper-colors: #FF00AA, #00ffff, #ffffff, #ffcc00;
       --modal-bg: #1a1a1a;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.6);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.6);
     }
 
     [data-theme="light"] {
@@ -31,17 +31,17 @@
       --bg-secondary: rgba(0, 0, 0, 0.05);
       --text-primary: #0d0d0d;
       --text-secondary: rgba(0, 0, 0, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: #FF00AA;
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(0, 0, 0, 0.1);
       --border-color: rgba(0, 0, 0, 0.3);
       --nav-bg: rgba(255, 255, 255, 0.8);
       --particle-color: #000000;
-      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+      --pepper-colors: #FF00AA, #0077ff, #000000, #ff9900;
       --modal-bg: #f5f5f5;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.4);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.4);
     }
 
     body {
@@ -67,7 +67,7 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       margin-left: 15px;
     }
-    
+
     .theme-toggle::before {
       content: '';
       position: relative;
@@ -78,7 +78,7 @@
       transition: all 0.3s ease;
       left: 0;
     }
-    
+
     [data-theme="light"] .theme-toggle::before {
       transform: translateX(26px);
     }
@@ -97,7 +97,7 @@
       align-items: center;
       transition: background 0.5s ease;
     }
-    
+
     .nav-container {
       width: 100%;
       max-width: 1200px;
@@ -107,7 +107,7 @@
       align-items: center;
       padding: 0 20px;
     }
-    
+
     .logo {
       color: var(--text-primary);
       font-weight: bold;
@@ -116,13 +116,13 @@
       display: flex;
       align-items: center;
     }
-    
+
     .nav-right {
       display: flex;
       align-items: center;
       gap: 20px;
     }
-    
+
     .navbar ul {
       list-style: none;
       margin: 0;
@@ -130,11 +130,11 @@
       display: flex;
       gap: 20px;
     }
-    
+
     .navbar li {
       position: relative;
     }
-    
+
     .navbar a {
       color: var(--text-primary);
       text-decoration: none;
@@ -149,22 +149,24 @@
       align-items: center;
       gap: 5px;
     }
-    
+
     .navbar a:hover {
-      color: var(--accent-color);
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    
+
     .navbar a::before {
       content: '→';
       opacity: 0;
       margin-right: 5px;
       transition: opacity 0.3s ease;
     }
-    
+
     .navbar a:hover::before {
       opacity: 1;
     }
-    
+
     .navbar a::after {
       content: '';
       position: absolute;
@@ -172,20 +174,20 @@
       left: 50%;
       width: 0;
       height: 2px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       transition: width 0.3s ease, left 0.3s ease;
     }
-    
+
     .navbar a:hover::after {
       width: 100%;
       left: 0;
     }
-    
+
     /* Dropdown Styles */
     .dropdown {
       position: relative;
     }
-    
+
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -199,11 +201,11 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
       z-index: 10;
     }
-    
+
     .dropdown:hover .dropdown-menu {
       display: block;
     }
-    
+
     .dropdown-menu a {
       display: block;
       padding: 10px 20px;
@@ -211,11 +213,11 @@
       text-align: left;
       border-radius: 0;
     }
-    
+
     .dropdown-menu a::after {
       bottom: 0;
     }
-    
+
     /* Mobile Menu Button */
     .menu-toggle {
       display: none;
@@ -229,7 +231,7 @@
       padding: 0;
       z-index: 10;
     }
-    
+
     .menu-toggle span {
       width: 100%;
       height: 3px;
@@ -239,7 +241,7 @@
       position: relative;
       transform-origin: center;
     }
-    
+
     /* Mobile Styles */
     @media (max-width: 768px) {
       .menu-toggle {
@@ -276,7 +278,9 @@
       }
       
       .navbar a:hover {
-        background: rgba(255, 0, 204, 0.1);
+        background: rgba(255, 0, 170, 0.1);
+        -webkit-background-clip: initial;
+        -webkit-text-fill-color: initial;
       }
       
       .menu-toggle.active span:nth-child(1) {
@@ -391,13 +395,13 @@
       color: white;
       font-weight: bold;
       transition: 0.3s;
-      box-shadow: 0px 0px 15px rgba(255, 0, 200, 0.5);
+      box-shadow: 0px 0px 15px rgba(255, 0, 170, 0.5);
       cursor: pointer;
     }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0px 0px 25px rgba(255, 0, 200, 0.9);
+      box-shadow: 0px 0px 25px rgba(255, 0, 170, 0.9);
     }
 
     /* Particles Background */
@@ -453,7 +457,7 @@
       display: block;
       width: 100px;
       height: 3px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       margin: 10px auto 0;
     }
     .tools-grid {
@@ -480,7 +484,7 @@
     }
     .tool-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 8px 25px rgba(255, 0, 170, 0.4);
       background: rgba(255, 255, 255, 0.15);
     }
     .tool-card h3 {
@@ -497,7 +501,9 @@
     .tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
-      color: #ff00cc;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       height: 60px;
       display: flex;
       align-items: center;
@@ -520,12 +526,12 @@
       visibility: hidden;
       transition: all 0.3s ease;
     }
-    
+
     .modal.active {
       opacity: 1;
       visibility: visible;
     }
-    
+
     .modal-content {
       background: var(--modal-bg);
       width: 90%;
@@ -533,30 +539,32 @@
       border-radius: 15px;
       padding: 30px;
       position: relative;
-      box-shadow: 0 0 35px rgba(255, 0, 200, 0.5);
+      box-shadow: 0 0 35px rgba(255, 0, 170, 0.5);
       border: 1px solid var(--modal-border);
     }
-    
+
     .close-btn {
       position: absolute;
       top: 15px;
       right: 20px;
       font-size: 28px;
-      color: var(--text-secondary);
+      color: #000000;
       cursor: pointer;
       transition: color 0.3s ease;
     }
-    
+
     .close-btn:hover {
-      color: #ff00cc;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    
+
     .modal-title {
       font-size: 28px;
       margin-bottom: 25px;
       color: var(--text-primary);
     }
-    
+
     /* Upload area */
     .modal-upload-area {
       border: 2px dashed var(--border-color);
@@ -567,18 +575,18 @@
       cursor: pointer;
       background: var(--modal-bg);
     }
-    
+
     .modal-upload-icon {
       font-size: 50px;
       color: var(--text-secondary);
       margin-bottom: 15px;
     }
-    
+
     .modal-upload-text {
       color: var(--text-secondary);
       font-size: 18px;
     }
-    
+
     .modal-upload-hint {
       color: var(--text-secondary);
       opacity: 0.5;
@@ -590,14 +598,16 @@
       display: block;
       margin-top: 10px;
       font-size: 16px;
-      color: var(--accent-color);
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       word-wrap: break-word;
       max-width: 100%;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
     }
-    
+
     /* Action buttons */
     .modal-action-btn {
       background: var(--accent-gradient);
@@ -609,22 +619,22 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 0 15px rgba(255, 0, 170, 0.4);
       margin-top: 15px;
     }
-    
+
     .modal-action-btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255, 0, 200, 0.7);
+      box-shadow: 0 0 25px rgba(255, 0, 170, 0.7);
     }
-    
+
     /* File list */
     .file-list {
       margin-top: 20px;
       max-height: 200px;
       overflow-y: auto;
     }
-    
+
     .file-item {
       display: flex;
       align-items: center;
@@ -634,27 +644,27 @@
       border-radius: 5px;
       margin-bottom: 5px;
     }
-    
+
     .file-name {
       flex: 1;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     .file-size {
       color: var(--text-secondary);
       font-size: 14px;
       margin-left: 10px;
       margin-right: 10px;
     }
-    
+
     .file-remove {
       color: #ff4d4d;
       cursor: pointer;
       margin-left: 10px;
     }
-    
+
     /* Progress bar */
     .progress-container {
       width: 100%;
@@ -665,14 +675,14 @@
       overflow: hidden;
       display: none;
     }
-    
+
     .progress-bar {
       height: 100%;
       background: var(--accent-gradient);
       width: 0%;
       transition: width 0.3s ease;
     }
-    
+
     /* Download button */
     .download-btn {
       display: none;
@@ -690,12 +700,12 @@
       box-shadow: 0 0 15px var(--download-btn-glow);
       margin-top: 15px;
     }
-    
+
     .download-btn:hover {
       transform: scale(1.1);
       box-shadow: 0 0 25px var(--download-btn-glow);
     }
-    
+
     .download-btn::before {
       content: '';
       position: absolute;
@@ -708,31 +718,31 @@
       transform: translate(-50%, -50%);
       transition: width 0.6s ease, height 0.6s ease;
     }
-    
+
     .download-btn:hover::before {
       width: 300px;
       height: 300px;
     }
-    
+
     .download-btn i {
       margin-right: 8px;
       transition: transform 0.3s ease;
     }
-    
+
     .download-btn:hover i {
       transform: translateX(5px);
     }
-    
+
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 var(--download-btn-glow); }
       50% { box-shadow: 0 0 20px 10px transparent; }
       100% { box-shadow: 0 0 0 0 var(--download-btn-glow); }
     }
-    
+
     .download-btn.pulse {
       animation: pulse 2s infinite;
     }
-    
+
     /* Responsive Design */
     @media (max-width: 768px) {
       h1 {
@@ -763,7 +773,6 @@
 <body>
   <!-- Particles -->
   <div id="particles-js"></div>
-
   <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-container">
@@ -772,7 +781,6 @@
         alt="Logo" style="height:30px; vertical-align:middle; margin-right:8px;">
         Nova Tools
       </div>
-      
       <div class="nav-right">
         <ul id="navMenu">
           <li><a href="#home">HOME</a></li>
@@ -798,10 +806,8 @@
       </button>
     </div>
   </nav>
-  
   <!-- Overlay for mobile menu -->
   <div class="overlay" id="overlay"></div>
-
   <!-- Tools Section -->
   <section class="section" id="tools">
     <h2>IMAGE TO PDF</h2>
@@ -815,13 +821,11 @@
       </div>
     </div>
   </section>
-
   <!-- PDF Tools Modal -->
   <div class="modal" id="pdfModal">
     <div class="modal-content">
       <span class="close-btn" onclick="closePdfModal()">&times;</span>
       <h2 class="modal-title" id="pdfModalTitle">Free Image to PDF Converter</h2>
-      
       <div class="modal-upload-area" id="uploadArea">
         <div class="modal-upload-icon">
           <i class="fas fa-cloud-upload-alt"></i>
@@ -846,9 +850,6 @@
       <a class="download-btn" id="downloadBtn" download><i class="fas fa-download"></i> Download Result</a>
     </div>
   </div>
-
- 
-
   <script>
     // Theme Toggle Functionality
     const themeToggle = document.getElementById('themeToggle');
@@ -964,8 +965,8 @@
       pepper.style.left = Math.random() * window.innerWidth + "px";
       const theme = body.getAttribute('data-theme');
       const colors = theme === 'dark' 
-        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
-        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+        ? ["#FF00AA", "#00ffff", "#ffffff", "#ffcc00"] 
+        : ["#FF00AA", "#0077ff", "#000000", "#ff9900"];
       pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
       pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(pepper);
