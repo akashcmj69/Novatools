@@ -151,7 +151,9 @@
     }
     
     .navbar a:hover {
-      color: var(--accent-color);
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .navbar a::before {
@@ -172,7 +174,7 @@
       left: 50%;
       width: 0;
       height: 2px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       transition: width 0.3s ease, left 0.3s ease;
     }
     
@@ -277,6 +279,8 @@
       
       .navbar a:hover {
         background: rgba(255, 0, 204, 0.1);
+        -webkit-background-clip: initial;
+        -webkit-text-fill-color: initial;
       }
       
       .menu-toggle.active span:nth-child(1) {
@@ -453,7 +457,7 @@
       display: block;
       width: 100px;
       height: 3px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       margin: 10px auto 0;
     }
     .tools-grid {
@@ -497,7 +501,9 @@
     .tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
-      color: #ff00cc;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       height: 60px;
       display: flex;
       align-items: center;
@@ -542,13 +548,15 @@
       top: 15px;
       right: 20px;
       font-size: 28px;
-      color: var(--text-secondary);
+      color: #000000;
       cursor: pointer;
       transition: color 0.3s ease;
     }
     
     .close-btn:hover {
-      color: #ff00cc;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .modal-title {
@@ -590,7 +598,9 @@
       display: block;
       margin-top: 10px;
       font-size: 16px;
-      color: var(--accent-color);
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       word-wrap: break-word;
       max-width: 100%;
       text-overflow: ellipsis;
@@ -811,7 +821,7 @@
           <i class="fas fa-plus-circle"></i>
         </div>
         <h3>Merge PDF</h3>
-        <center><p>Combine multiple PDF files into one document.</p><center/>
+        <center><p>Combine multiple PDF files into one document.</p></center>
       </div>
     </div>
   </section>
@@ -846,8 +856,6 @@
       <a class="download-btn" id="downloadBtn" download><i class="fas fa-download"></i> Download Result</a>
     </div>
   </div>
-
-  
 
   <script>
     // Theme Toggle Functionality
