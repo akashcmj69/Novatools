@@ -843,7 +843,7 @@
           <i class="fas fa-cut"></i>
         </div>
         <h3>Split PDF</h3>
-        <center><p>Split a PDF into individual pages or by custom ranges.</p><center/>
+        <center><p>Split a PDF into individual pages or by custom ranges.</p></center>
       </div>
     </div>
   </section>
@@ -891,8 +891,6 @@
       <a class="download-btn" id="downloadBtn" download><i class="fas fa-download"></i> Download Results</a>
     </div>
   </div>
-
-  
 
   <script>
     // Theme Toggle Functionality
@@ -1045,6 +1043,7 @@
     // PDF Split Modal Functions
     let currentTool = '';
     let uploadedFiles = [];
+    let lastDownloadUrl = null; // Track last download URL
     
     const selectedFileNameDisplay = document.getElementById('selectedFileName');
     const splitOptions = document.getElementById('splitOptions');
@@ -1075,12 +1074,20 @@
       document.getElementById('progressContainer').style.display = 'none';
       document.getElementById('progressBar').style.width = '0%';
       document.getElementById('processBtn').style.display = 'block';
-      document.getElementById('downloadBtn').style.display = 'none';
+      document.getElementById('processBtn').disabled = false;
       document.getElementById('fileInput').value = '';
       selectedFileNameDisplay.textContent = 'No file chosen';
       document.getElementById('splitIndividual').checked = true;
       pageRangeInput.style.display = 'none';
       pageRangeInput.value = '';
+      
+      // Clear previous download URL
+      if (lastDownloadUrl) {
+        URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = null;
+      }
+      document.getElementById('downloadBtn').href = '';
+      document.getElementById('downloadBtn').download = '';
     }
     
     window.addEventListener('click', function(event) {
@@ -1206,15 +1213,14 @@
         progressBar.style.width = '100%';
         processBtn.style.display = 'none';
         downloadBtn.style.display = 'block';
+        lastDownloadUrl = result; // Store the URL
         downloadBtn.href = result;
         downloadBtn.download = 'split_document.pdf';
-        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Result';
+        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Results';
       } catch (error) {
         console.error('Error splitting PDFs:', error);
         alert('Error splitting PDFs: ' + error.message);
-        processBtn.disabled = false;
-        progressBar.style.width = '0%';
-        progressContainer.style.display = 'none';
+        resetModal(); // Reset on error to allow retry
       }
     });
     
