@@ -53,7 +53,6 @@
       transition: background 0.5s ease, color 0.5s ease;
     }
 
-    /* Theme Toggle */
     .theme-toggle {
       width: 50px;
       height: 24px;
@@ -83,7 +82,6 @@
       transform: translateX(26px);
     }
 
-    /* Navbar */
     .navbar {
       position: fixed;
       top: 0;
@@ -183,7 +181,6 @@
       left: 0;
     }
     
-    /* Dropdown Styles */
     .dropdown {
       position: relative;
     }
@@ -218,7 +215,6 @@
       bottom: 0;
     }
     
-    /* Mobile Menu Button */
     .menu-toggle {
       display: none;
       flex-direction: column;
@@ -242,7 +238,6 @@
       transform-origin: center;
     }
     
-    /* Mobile Styles */
     @media (max-width: 768px) {
       .menu-toggle {
         display: flex;
@@ -335,7 +330,6 @@
         transform: translateX(23px);
       }
       
-      /* Mobile Dropdown Styles */
       .dropdown-menu {
         position: static;
         display: none;
@@ -404,7 +398,6 @@
       box-shadow: 0px 0px 25px rgba(255, 0, 200, 0.9);
     }
 
-    /* Particles Background */
     #particles-js {
       position: fixed;
       width: 100%;
@@ -414,7 +407,6 @@
       z-index: 0;
     }
 
-    /* Falling Pepper (Confetti) */
     .pepper {
       position: fixed;
       top: -10px;
@@ -431,7 +423,6 @@
       100% { transform: translateY(100vh) rotate(360deg); }
     }
 
-    /* Tools Section */
     .section {
       padding: 60px 20px;
       background: var(--bg-secondary);
@@ -510,7 +501,6 @@
       justify-content: center;
     }
 
-    /* Modal Popup */
     .modal {
       position: fixed;
       top: 0;
@@ -565,7 +555,6 @@
       color: var(--text-primary);
     }
     
-    /* Upload area */
     .modal-upload-area {
       border: 2px dashed var(--border-color);
       border-radius: 12px;
@@ -608,7 +597,6 @@
       white-space: nowrap;
     }
     
-    /* Action buttons */
     .modal-action-btn {
       background: var(--accent-gradient);
       color: white;
@@ -628,7 +616,6 @@
       box-shadow: 0 0 25px rgba(255, 0, 200, 0.7);
     }
     
-    /* File list */
     .file-list {
       margin-top: 20px;
       max-height: 200px;
@@ -665,7 +652,6 @@
       margin-left: 10px;
     }
     
-    /* Progress bar */
     .progress-container {
       width: 100%;
       height: 8px;
@@ -683,7 +669,6 @@
       transition: width 0.3s ease;
     }
     
-    /* Download button */
     .download-btn {
       display: none;
       background: var(--download-btn-bg);
@@ -743,7 +728,6 @@
       animation: pulse 2s infinite;
     }
     
-    /* Responsive Design */
     @media (max-width: 768px) {
       h1 {
         font-size: 32px;
@@ -1008,6 +992,7 @@
     // PDF Merge Modal Functions
     let currentTool = '';
     let uploadedFiles = [];
+    let lastDownloadUrl = null; // Track last download URL
     
     const selectedFileNameDisplay = document.getElementById('selectedFileName');
     
@@ -1029,14 +1014,29 @@
     }
     
     function resetModal() {
+      // Clear previous files and state
       uploadedFiles = [];
       document.getElementById('fileList').innerHTML = '';
       document.getElementById('uploadArea').classList.remove('active');
       document.getElementById('progressContainer').style.display = 'none';
       document.getElementById('progressBar').style.width = '0%';
       document.getElementById('processBtn').style.display = 'block';
+      document.getElementById('processBtn').disabled = false;
       document.getElementById('downloadBtn').style.display = 'none';
-      document.getElementById('fileInput').value = '';
+      
+      // Clear file input
+      const fileInput = document.getElementById('fileInput');
+      fileInput.value = '';
+      
+      // Revoke previous download URL if exists
+      if (lastDownloadUrl) {
+        URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = null;
+      }
+      
+      // Reset download button
+      document.getElementById('downloadBtn').href = '';
+      document.getElementById('downloadBtn').download = '';
       selectedFileNameDisplay.textContent = 'No file chosen';
     }
     
@@ -1173,15 +1173,14 @@
         progressBar.style.width = '100%';
         processBtn.style.display = 'none';
         downloadBtn.style.display = 'block';
+        lastDownloadUrl = result; // Store the URL
         downloadBtn.href = result;
         downloadBtn.download = 'merged_document.pdf';
         downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Result';
       } catch (error) {
         console.error('Error merging PDFs:', error);
         alert('Error merging PDFs: ' + error.message);
-        processBtn.disabled = false;
-        progressBar.style.width = '0%';
-        progressContainer.style.display = 'none';
+        resetModal(); // Reset on error to allow retry
       }
     });
     
