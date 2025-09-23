@@ -548,7 +548,7 @@
       top: 15px;
       right: 20px;
       font-size: 28px;
-      color: #000000;
+      color: var(--text-secondary);
       cursor: pointer;
       transition: color 0.3s ease;
     }
@@ -1000,6 +1000,7 @@
 
     // Image to PDF Modal Functions
     let uploadedFiles = [];
+    let lastDownloadUrl = null; // Track last download URL
     
     const selectedFileNameDisplay = document.getElementById('selectedFileName');
     
@@ -1026,9 +1027,18 @@
       document.getElementById('progressContainer').style.display = 'none';
       document.getElementById('progressBar').style.width = '0%';
       document.getElementById('processBtn').style.display = 'block';
+      document.getElementById('processBtn').disabled = false;
       document.getElementById('downloadBtn').style.display = 'none';
       document.getElementById('fileInput').value = '';
       selectedFileNameDisplay.textContent = 'No file chosen';
+      
+      // Clear previous download URL
+      if (lastDownloadUrl) {
+        URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = null;
+      }
+      document.getElementById('downloadBtn').href = '';
+      document.getElementById('downloadBtn').download = '';
     }
     
     window.addEventListener('click', function(event) {
@@ -1164,15 +1174,14 @@
         progressBar.style.width = '100%';
         processBtn.style.display = 'none';
         downloadBtn.style.display = 'block';
+        lastDownloadUrl = result; // Store the URL
         downloadBtn.href = result;
         downloadBtn.download = 'converted_document.pdf';
         downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Result';
       } catch (error) {
         console.error('Error converting images:', error);
         alert('Error converting images: ' + error.message);
-        processBtn.disabled = false;
-        progressBar.style.width = '0%';
-        progressContainer.style.display = 'none';
+        resetModal(); // Reset on error to allow retry
       }
     });
     
