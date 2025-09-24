@@ -7,6 +7,7 @@
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -14,17 +15,17 @@
       --bg-secondary: rgba(255, 255, 255, 0.05);
       --text-primary: white;
       --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: #FF00AA; /* Updated from #ff00cc (start color of the new gradient) */
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF); /* Updated new gradient */
       --card-bg: rgba(255, 255, 255, 0.1);
       --border-color: rgba(255, 255, 255, 0.3);
       --nav-bg: rgba(0, 0, 0, 0.8);
       --particle-color: #ffffff;
-      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+      --pepper-colors: #FF00AA, #00ffff, #ffffff, #ffcc00; /* Updated pink in pepper colors */
       --modal-bg: #1a1a1a;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.6);
+      --modal-border: rgba(255, 0, 170, 0.3); /* Updated from rgba(255, 0, 200, 0.3) to match new pink start color */
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF); /* Updated new gradient */
+      --download-btn-glow: rgba(255, 0, 170, 0.6); /* Updated from rgba(255, 0, 200, 0.6) to match new pink start color */
     }
 
     [data-theme="light"] {
@@ -32,17 +33,17 @@
       --bg-secondary: rgba(0, 0, 0, 0.05);
       --text-primary: #0d0d0d;
       --text-secondary: rgba(0, 0, 0, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: #FF00AA; /* Updated from #ff00cc */
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF); /* Updated new gradient */
       --card-bg: rgba(0, 0, 0, 0.1);
       --border-color: rgba(0, 0, 0, 0.3);
       --nav-bg: rgba(255, 255, 255, 0.8);
       --particle-color: #000000;
-      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+      --pepper-colors: #FF00AA, #0077ff, #000000, #ff9900; /* Updated pink in pepper colors */
       --modal-bg: #f5f5f5;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.4);
+      --modal-border: rgba(255, 0, 170, 0.3); /* Updated from rgba(255, 0, 200, 0.3) */
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF); /* Updated new gradient */
+      --download-btn-glow: rgba(255, 0, 170, 0.4); /* Updated from rgba(255, 0, 200, 0.4) */
     }
 
     body {
@@ -152,7 +153,10 @@
     }
     
     .navbar a:hover {
-      color: var(--accent-color);
+      background: var(--accent-gradient); /* Applied gradient to text */
+      -webkit-background-clip: text; /* Applied gradient to text */
+      -webkit-text-fill-color: transparent; /* Applied gradient to text */
+      color: transparent; /* Fallback for text gradient */
     }
     
     .navbar a::before {
@@ -173,7 +177,7 @@
       left: 50%;
       width: 0;
       height: 2px;
-      background: var(--accent-color);
+      background: var(--accent-gradient); /* Updated to gradient */
       transition: width 0.3s ease, left 0.3s ease;
     }
     
@@ -277,7 +281,8 @@
       }
       
       .navbar a:hover {
-        background: rgba(255, 0, 204, 0.1);
+        background: linear-gradient(90deg, rgba(255, 0, 170, 0.1), rgba(0, 0, 255, 0.1)); /* Updated to gradient rgba for hover background */
+        -webkit-text-fill-color: initial; /* Reset for mobile hover background */
       }
       
       .menu-toggle.active span:nth-child(1) {
@@ -392,13 +397,13 @@
       color: white;
       font-weight: bold;
       transition: 0.3s;
-      box-shadow: 0px 0px 15px rgba(255, 0, 200, 0.5);
+      box-shadow: 0px 0px 15px rgba(255, 0, 170, 0.5); /* Updated box-shadow color */
       cursor: pointer;
     }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0px 0px 25px rgba(255, 0, 200, 0.9);
+      box-shadow: 0px 0px 25px rgba(255, 0, 170, 0.9); /* Updated box-shadow color */
     }
 
     /* Particles Background */
@@ -417,7 +422,7 @@
       top: -10px;
       width: 8px;
       height: 8px;
-      background: var(--accent-color);
+      background: var(--accent-color); /* This will pick a random color from --pepper-colors */
       opacity: 0.8;
       border-radius: 2px;
       animation: fall linear infinite;
@@ -454,7 +459,7 @@
       display: block;
       width: 100px;
       height: 3px;
-      background: var(--accent-color);
+      background: var(--accent-gradient); /* Updated to gradient */
       margin: 10px auto 0;
     }
     .tools-grid {
@@ -481,7 +486,7 @@
     }
     .tool-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 8px 25px rgba(255, 0, 170, 0.4); /* Updated box-shadow color */
       background: rgba(255, 255, 255, 0.15);
     }
     .tool-card h3 {
@@ -498,7 +503,10 @@
     .tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
-      color: #ff00cc;
+      background: var(--accent-gradient); /* Applied gradient to icons */
+      -webkit-background-clip: text; /* Applied gradient to icons */
+      -webkit-text-fill-color: transparent; /* Applied gradient to icons */
+      color: transparent; /* Fallback for icon gradient */
       height: 60px;
       display: flex;
       align-items: center;
@@ -534,7 +542,7 @@
       border-radius: 15px;
       padding: 30px;
       position: relative;
-      box-shadow: 0 0 35px rgba(255, 0, 200, 0.5);
+      box-shadow: 0 0 35px rgba(255, 0, 170, 0.5); /* Updated box-shadow color */
       border: 1px solid var(--modal-border);
     }
     
@@ -549,7 +557,10 @@
     }
     
     .close-btn:hover {
-      color: #ff00cc;
+      background: var(--accent-gradient); /* Applied gradient to close button on hover */
+      -webkit-background-clip: text; /* Applied gradient to close button on hover */
+      -webkit-text-fill-color: transparent; /* Applied gradient to close button on hover */
+      color: transparent; /* Fallback for close button gradient */
     }
     
     .modal-title {
@@ -587,11 +598,14 @@
       margin-top: 10px;
     }
 
-    #selectedFileName {
+    #selectedExcelFileName {
       display: block;
       margin-top: 10px;
+      background: var(--accent-gradient); /* Applied gradient to "No file chosen" text */
+      -webkit-background-clip: text; /* Applied gradient to "No file chosen" text */
+      -webkit-text-fill-color: transparent; /* Applied gradient to "No file chosen" text */
+      color: transparent; /* Fallback for text gradient */
       font-size: 16px;
-      color: var(--accent-color);
       word-wrap: break-word;
       max-width: 100%;
       text-overflow: ellipsis;
@@ -601,7 +615,7 @@
     
     /* Action buttons */
     .modal-action-btn {
-      background: var(--accent-gradient);
+      background: var(--accent-gradient); /* Already using accent-gradient, value updated in :root */
       color: white;
       border: none;
       border-radius: 30px;
@@ -610,13 +624,13 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 0 15px rgba(255, 0, 170, 0.4); /* Updated box-shadow color */
       margin-top: 15px;
     }
     
     .modal-action-btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255, 0, 200, 0.7);
+      box-shadow: 0 0 25px rgba(255, 0, 170, 0.7); /* Updated box-shadow color */
     }
     
     /* File list */
@@ -669,7 +683,7 @@
     
     .progress-bar {
       height: 100%;
-      background: var(--accent-gradient);
+      background: var(--accent-gradient); /* Already using accent-gradient, value updated in :root */
       width: 0%;
       transition: width 0.3s ease;
     }
@@ -677,7 +691,7 @@
     /* Download button */
     .download-btn {
       display: none;
-      background: var(--download-btn-bg);
+      background: var(--download-btn-bg); /* Value updated in :root */
       color: white;
       border: none;
       border-radius: 30px;
@@ -688,13 +702,13 @@
       position: relative;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 15px var(--download-btn-glow);
+      box-shadow: 0 0 15px var(--download-btn-glow); /* Value updated in :root */
       margin-top: 15px;
     }
     
     .download-btn:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 25px var(--download-btn-glow);
+      box-shadow: 0 0 25px var(--download-btn-glow); /* Value updated in :root */
     }
     
     .download-btn::before {
@@ -725,7 +739,7 @@
     }
     
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 var(--download-btn-glow); }
+      0% { box-shadow: 0 0 0 0 var(--download-btn-glow); } /* Value updated in :root */
       50% { box-shadow: 0 0 20px 10px transparent; }
       100% { box-shadow: 0 0 0 0 var(--download-btn-glow); }
     }
@@ -965,9 +979,12 @@
       pepper.classList.add('pepper');
       pepper.style.left = Math.random() * window.innerWidth + "px";
       const theme = body.getAttribute('data-theme');
-      const colors = theme === 'dark' 
-        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
-        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+      // Use the updated pepper colors defined in the CSS variables
+      // Splitting the CSS variable string to get individual colors
+      const rootStyles = getComputedStyle(document.documentElement);
+      const pepperColorsString = rootStyles.getPropertyValue('--pepper-colors');
+      const colors = pepperColorsString.split(',').map(color => color.trim());
+
       pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
       pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(pepper);
@@ -1001,6 +1018,7 @@
 
     // Excel to PDF Modal Functions
     let uploadedExcelFile = null;
+    let lastDownloadUrl = null; // Track last download URL
     
     const selectedExcelFileNameDisplay = document.getElementById('selectedExcelFileName');
     
@@ -1023,9 +1041,18 @@
       document.getElementById('excelProgressContainer').style.display = 'none';
       document.getElementById('excelProgressBar').style.width = '0%';
       document.getElementById('excelProcessBtn').style.display = 'block';
+      document.getElementById('excelProcessBtn').disabled = false;
       document.getElementById('excelDownloadBtn').style.display = 'none';
       document.getElementById('excelFileInput').value = '';
       selectedExcelFileNameDisplay.textContent = 'No file chosen';
+      
+      // Revoke previous download URL if exists
+      if (lastDownloadUrl) {
+        URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = null;
+      }
+      document.getElementById('excelDownloadBtn').href = '';
+      document.getElementById('excelDownloadBtn').download = '';
     }
     
     window.addEventListener('click', function(event) {
@@ -1110,14 +1137,19 @@
     
     function removeExcelFile() {
       uploadedExcelFile = null;
-      excelFileList.innerHTML = '';
-      excelUploadArea.classList.remove('active');
+      updateExcelFileList();
       selectedExcelFileNameDisplay.textContent = 'No file chosen';
+      excelUploadArea.classList.remove('active');
     }
     
     excelProcessBtn.addEventListener('click', async () => {
       if (!uploadedExcelFile) {
         alert('Please select an Excel file to convert');
+        return;
+      }
+      
+      if (typeof html2canvas === 'undefined') {
+        alert('html2canvas library failed to load. Please try again later.');
         return;
       }
       
@@ -1129,15 +1161,14 @@
         excelProgressBar.style.width = '100%';
         excelProcessBtn.style.display = 'none';
         excelDownloadBtn.style.display = 'block';
+        lastDownloadUrl = result; // Store the new URL
         excelDownloadBtn.href = result;
         excelDownloadBtn.download = uploadedExcelFile.name.replace(/\.(xlsx|xls)$/i, '.pdf');
         excelDownloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
       } catch (error) {
         console.error('Error converting Excel:', error);
         alert('Error converting Excel file: ' + error.message);
-        excelProcessBtn.disabled = false;
-        excelProgressBar.style.width = '0%';
-        excelProgressContainer.style.display = 'none';
+        resetExcelModal(); // Reset on error to allow retry
       }
     });
     
@@ -1206,7 +1237,7 @@
     }
     
     async function addTableToPdf(pdfDoc, table, isFirstPage) {
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => { // Added reject for addTableToPdf
         // Set initial y position based on whether it's the first page
         let yPosition = isFirstPage ? 25 : 15;
         const pageHeight = pdfDoc.internal.pageSize.height;
@@ -1253,31 +1284,30 @@
           pdfDoc.addImage(imgData, 'JPEG', margin, yPosition, imgWidth, imgHeight);
           
           resolve();
+        }).catch(error => {
+          document.body.removeChild(tempContainer);
+          reject(error);
         });
       });
     }
     
-    // Load html2canvas dynamically
-    function loadHtml2Canvas() {
-      return new Promise((resolve, reject) => {
-        if (typeof html2canvas !== 'undefined') {
-          resolve();
-          return;
-        }
-        
-        const script = document.createElement('script');
-        script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
-        script.onload = resolve;
-        script.onerror = reject;
-        document.head.appendChild(script);
-      });
-    }
-    
-    // Initialize html2canvas when the Excel modal is opened
-    document.getElementById('excelModal').addEventListener('click', function() {
-      loadHtml2Canvas().catch(error => {
-        console.error('Failed to load html2canvas:', error);
-      });
+    // Check if libraries loaded correctly
+    window.addEventListener('load', () => {
+      if (typeof html2canvas === 'undefined') {
+        console.error('html2canvas failed to load');
+        document.getElementById('excelProcessBtn').disabled = true;
+        document.getElementById('excelUploadArea').querySelector('.modal-upload-hint').textContent = 'Conversion unavailable due to library load failure';
+      }
+      if (typeof XLSX === 'undefined') {
+        console.error('SheetJS failed to load');
+        document.getElementById('excelProcessBtn').disabled = true;
+        document.getElementById('excelUploadArea').querySelector('.modal-upload-hint').textContent = 'Conversion unavailable due to library load failure';
+      }
+      if (typeof jsPDF === 'undefined') {
+        console.error('jsPDF failed to load');
+        document.getElementById('excelProcessBtn').disabled = true;
+        document.getElementById('excelUploadArea').querySelector('.modal-upload-hint').textContent = 'Conversion unavailable due to library load failure';
+      }
     });
   </script>
 </body>
