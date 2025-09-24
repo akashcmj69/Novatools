@@ -6,6 +6,7 @@
   <title>Nova Tools</title>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="https://unpkg.com/pdf-lib@1.17.0/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -13,17 +14,16 @@
       --bg-secondary: rgba(255, 255, 255, 0.05);
       --text-primary: white;
       --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(255, 255, 255, 0.1);
       --border-color: rgba(255, 255, 255, 0.3);
       --nav-bg: rgba(0, 0, 0, 0.8);
       --particle-color: #ffffff;
-      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+      --pepper-colors: #FF00AA, #00ffff, #ffffff, #ffcc00;
       --modal-bg: #1a1a1a;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.6);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.6);
     }
 
     [data-theme="light"] {
@@ -31,17 +31,16 @@
       --bg-secondary: rgba(0, 0, 0, 0.05);
       --text-primary: #0d0d0d;
       --text-secondary: rgba(0, 0, 0, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(0, 0, 0, 0.1);
       --border-color: rgba(0, 0, 0, 0.3);
       --nav-bg: rgba(255, 255, 255, 0.8);
       --particle-color: #000000;
-      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+      --pepper-colors: #FF00AA, #0077ff, #000000, #ff9900;
       --modal-bg: #f5f5f5;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.4);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.4);
     }
 
     body {
@@ -151,7 +150,9 @@
     }
     
     .navbar a:hover {
-      color: var(--accent-color);
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .navbar a::before {
@@ -172,7 +173,7 @@
       left: 50%;
       width: 0;
       height: 2px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       transition: width 0.3s ease, left 0.3s ease;
     }
     
@@ -276,7 +277,9 @@
       }
       
       .navbar a:hover {
-        background: rgba(255, 0, 204, 0.1);
+        background: rgba(255, 0, 170, 0.1);
+        -webkit-background-clip: initial;
+        -webkit-text-fill-color: initial;
       }
       
       .menu-toggle.active span:nth-child(1) {
@@ -391,13 +394,13 @@
       color: white;
       font-weight: bold;
       transition: 0.3s;
-      box-shadow: 0px 0px 15px rgba(255, 0, 200, 0.5);
+      box-shadow: 0px 0px 15px rgba(255, 0, 170, 0.5);
       cursor: pointer;
     }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0px 0px 25px rgba(255, 0, 200, 0.9);
+      box-shadow: 0px 0px 25px rgba(255, 0, 170, 0.9);
     }
 
     /* Particles Background */
@@ -416,7 +419,7 @@
       top: -10px;
       width: 8px;
       height: 8px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       opacity: 0.8;
       border-radius: 2px;
       animation: fall linear infinite;
@@ -453,7 +456,7 @@
       display: block;
       width: 100px;
       height: 3px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       margin: 10px auto 0;
     }
     .tools-grid {
@@ -480,7 +483,7 @@
     }
     .tool-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 8px 25px rgba(255, 0, 170, 0.4);
       background: rgba(255, 255, 255, 0.15);
     }
     .tool-card h3 {
@@ -497,7 +500,9 @@
     .tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
-      color: #ff00cc;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       height: 60px;
       display: flex;
       align-items: center;
@@ -533,7 +538,7 @@
       border-radius: 15px;
       padding: 30px;
       position: relative;
-      box-shadow: 0 0 35px rgba(255, 0, 200, 0.5);
+      box-shadow: 0 0 35px rgba(255, 0, 170, 0.5);
       border: 1px solid var(--modal-border);
     }
     
@@ -548,7 +553,9 @@
     }
     
     .close-btn:hover {
-      color: #ff00cc;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .modal-title {
@@ -590,7 +597,9 @@
       display: block;
       margin-top: 10px;
       font-size: 16px;
-      color: var(--accent-color);
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       word-wrap: break-word;
       max-width: 100%;
       text-overflow: ellipsis;
@@ -619,8 +628,8 @@
     
     .target-size-input:focus {
       outline: none;
-      border-color: var(--accent-color);
-      box-shadow: 0 0 10px rgba(255, 0, 200, 0.3);
+      border-color: var(--accent-gradient);
+      box-shadow: 0 0 10px rgba(255, 0, 170, 0.3);
     }
     
     .target-size-label {
@@ -639,13 +648,13 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 0 15px rgba(255, 0, 170, 0.4);
       margin-top: 15px;
     }
     
     .modal-action-btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255, 0, 200, 0.7);
+      box-shadow: 0 0 25px rgba(255, 0, 170, 0.7);
     }
     
     /* File list */
@@ -810,6 +819,9 @@
             <a href="#tools">TOOLS</a>
             <div class="dropdown-menu">
               <a href="#pdf-tools">PDF TOOLS</a>
+              <a href="#finance-tools">FINANCE TOOLS</a>
+              <a href="#image-tools">IMAGE TOOLS</a>
+              <a href="#utilities-tools">UTILITIES TOOLS</a>
             </div>
           </li>
           <li><a href="#faq">FAQ</a></li>
@@ -884,6 +896,11 @@
   </div>
 
   <script>
+    // Ensure pdf.js worker is set
+    if (typeof pdfjsLib !== 'undefined') {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
+    }
+
     // Theme Toggle Functionality
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
@@ -998,8 +1015,8 @@
       pepper.style.left = Math.random() * window.innerWidth + "px";
       const theme = body.getAttribute('data-theme');
       const colors = theme === 'dark' 
-        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
-        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+        ? ["#FF00AA", "#00ffff", "#ffffff", "#ffcc00"] 
+        : ["#FF00AA", "#0077ff", "#000000", "#ff9900"];
       pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
       pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(pepper);
@@ -1034,6 +1051,7 @@
     // PDF Compressor Modal Functions
     let currentTool = '';
     let uploadedFile = null;
+    let lastDownloadUrl = null; // Track last download URL
     
     const selectedFileNameDisplay = document.getElementById('selectedFileName');
     const targetSizeInput = document.getElementById('targetSizeInput');
@@ -1062,10 +1080,19 @@
       document.getElementById('progressContainer').style.display = 'none';
       document.getElementById('progressBar').style.width = '0%';
       document.getElementById('processBtn').style.display = 'block';
+      document.getElementById('processBtn').disabled = false;
       document.getElementById('downloadBtn').style.display = 'none';
       document.getElementById('fileInput').value = '';
       document.getElementById('targetSizeInput').value = '';
       selectedFileNameDisplay.textContent = 'No file chosen';
+      
+      // Clear previous download URL
+      if (lastDownloadUrl) {
+        URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = null;
+      }
+      document.getElementById('downloadBtn').href = '';
+      document.getElementById('downloadBtn').download = '';
     }
     
     window.addEventListener('click', function(event) {
@@ -1187,6 +1214,12 @@
         return;
       }
       
+      if (typeof pdfjsLib === 'undefined') {
+        alert('PDF.js library failed to load. Please try again later.');
+        resetModal();
+        return;
+      }
+      
       progressContainer.style.display = 'block';
       processBtn.disabled = true;
       
@@ -1195,15 +1228,14 @@
         progressBar.style.width = '100%';
         processBtn.style.display = 'none';
         downloadBtn.style.display = 'block';
+        lastDownloadUrl = result.url; // Store the URL
         downloadBtn.href = result.url;
         downloadBtn.download = 'compressed_document.pdf';
         downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Compressed PDF';
       } catch (error) {
         console.error('Error compressing PDF:', error);
         alert('Error compressing PDF: ' + error.message);
-        processBtn.disabled = false;
-        progressBar.style.width = '0%';
-        progressContainer.style.display = 'none';
+        resetModal(); // Reset on error to allow retry
       }
     });
     
@@ -1211,50 +1243,122 @@
       progressBar.style.width = percent + '%';
     }
     
+    async function performCompression(pdf, quality, scale) {
+      const { PDFDocument } = PDFLib;
+      const compressedPdf = await PDFDocument.create();
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const viewport = page.getViewport({ scale: scale });
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        
+        await page.render({
+          canvasContext: context,
+          viewport: viewport
+        }).promise;
+        
+        const imgData = canvas.toDataURL('image/jpeg', quality);
+        const imgBytes = dataURLtoBlob(imgData);
+        
+        if (!(imgBytes instanceof Blob)) {
+          throw new Error('Invalid image data generated');
+        }
+        
+        const arrayBuffer = await imgBytes.arrayBuffer();
+        const imgArray = new Uint8Array(arrayBuffer);
+        
+        const jpgImage = await compressedPdf.embedJpg(imgArray);
+        const newPage = compressedPdf.addPage([viewport.width, viewport.height]);
+        newPage.drawImage(jpgImage, {
+          x: 0,
+          y: 0,
+          width: viewport.width,
+          height: viewport.height
+        });
+        
+        updateProgress((i / pdf.numPages) * 100);
+      }
+      
+      const bytes = await compressedPdf.save({ useObjectStreams: true });
+      return { bytes, size: bytes.length };
+    }
+    
     async function compressPdf(targetSize) {
       const { PDFDocument } = PDFLib;
       const fileBytes = await readFileAsArrayBuffer(uploadedFile);
-      const pdfDoc = await PDFDocument.load(fileBytes);
+      const pdf = await pdfjsLib.getDocument({ data: fileBytes }).promise;
+      const originalSize = uploadedFile.size;
       
-      // Create a new PDF document
-      const compressedPdf = await PDFDocument.create();
+      let scale = targetSize ? Math.max(0.3, Math.sqrt(targetSize / originalSize)) : 0.5;
+      let compressedBytes;
+      let currentSize;
       
-      // Copy pages
-      const pages = await compressedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
-      pages.forEach(page => compressedPdf.addPage(page));
-      
-      updateProgress(50);
-      
-      // Basic compression with object streams
-      let compressedBytes = await compressedPdf.save({ useObjectStreams: true });
-      
-      // If target size is specified, attempt to adjust compression
-      if (targetSize) {
-        let currentSize = compressedBytes.length;
-        let compressionLevel = 0.9; // Initial compression level (high quality)
-        const maxAttempts = 5; // Limit iterations to prevent infinite loops
+      if (!targetSize) {
+        // No target: compress with default settings, ensure < original
+        let quality = 0.5;
         let attempt = 0;
+        const maxAttempts = 5;
         
-        // Note: Client-side image compression is limited in PDF-lib
-        // We're simulating by repeatedly saving with different settings
-        while (currentSize > targetSize && attempt < maxAttempts && compressionLevel > 0.1) {
-          compressionLevel -= 0.2; // Reduce quality incrementally
-          compressedBytes = await compressedPdf.save({ useObjectStreams: true });
-          currentSize = compressedBytes.length;
-          updateProgress(50 + (attempt + 1) * (50 / maxAttempts));
+        while (attempt < maxAttempts) {
+          const result = await performCompression(pdf, quality, scale);
+          currentSize = result.size;
+          compressedBytes = result.bytes;
+          
+          if (currentSize < originalSize) {
+            break;
+          }
+          
+          quality = Math.max(0.05, quality * 0.7);
+          scale = Math.max(0.3, scale * 0.8);
           attempt++;
         }
         
-        if (currentSize > targetSize) {
-          console.warn('Could not compress to exact target size. Closest size achieved: ' + formatFileSize(currentSize));
+        if (currentSize >= originalSize) {
+          console.warn('Could not compress below original size; using lowest quality');
+        }
+      } else {
+        // With target: binary search for highest quality where size <= target
+        let low = 0.05;
+        let high = 1.0;
+        let bestBytes = null;
+        let bestSize = Infinity;
+        let bestDiff = Infinity;
+        
+        for (let iter = 0; iter < 10; iter++) {
+          const quality = (low + high) / 2;
+          const result = await performCompression(pdf, quality, scale);
+          currentSize = result.size;
+          
+          if (currentSize <= targetSize) {
+            low = quality;
+            const diff = targetSize - currentSize;
+            if (diff < bestDiff) {
+              bestBytes = result.bytes;
+              bestSize = currentSize;
+              bestDiff = diff;
+            }
+          } else {
+            high = quality;
+          }
+        }
+        
+        if (bestBytes) {
+          compressedBytes = bestBytes;
+          currentSize = bestSize;
+        } else {
+          // If no version <= target, use the smallest
+          compressedBytes = result.bytes; // last one
+          currentSize = result.size;
+          alert('Could not reach target size exactly. Closest size: ' + formatFileSize(currentSize));
         }
       }
       
-      updateProgress(100);
-      
       return {
         url: URL.createObjectURL(new Blob([compressedBytes], { type: 'application/pdf' })),
-        size: compressedBytes.length
+        size: currentSize
       };
     }
     
@@ -1266,6 +1370,27 @@
         reader.readAsArrayBuffer(file);
       });
     }
+    
+    function dataURLtoBlob(dataURL) {
+      const parts = dataURL.split(';base64,');
+      const contentType = parts[0].split(':')[1];
+      const raw = window.atob(parts[1]);
+      const rawLength = raw.length;
+      const uInt8Array = new Uint8Array(rawLength);
+      for (let i = 0; i < rawLength; ++i) {
+        uInt8Array[i] = raw.charCodeAt(i);
+      }
+      return new Blob([uInt8Array], { type: contentType });
+    }
+
+    // Check if pdf.js loaded correctly
+    window.addEventListener('load', () => {
+      if (typeof pdfjsLib === 'undefined') {
+        console.error('pdf.js failed to load');
+        document.getElementById('processBtn').disabled = true;
+        document.getElementById('uploadHint').textContent = 'PDF processing unavailable due to library load failure';
+      }
+    });
   </script>
 </body>
 </html>
