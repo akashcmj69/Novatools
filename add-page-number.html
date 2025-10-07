@@ -13,17 +13,17 @@
       --bg-secondary: rgba(255, 255, 255, 0.05);
       --text-primary: white;
       --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(255, 255, 255, 0.1);
       --border-color: rgba(255, 255, 255, 0.3);
       --nav-bg: rgba(0, 0, 0, 0.8);
       --particle-color: #ffffff;
-      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+      --pepper-colors: #FF00AA, #00ffff, #ffffff, #ffcc00;
       --modal-bg: #1a1a1a;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.6);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.6);
     }
 
     [data-theme="light"] {
@@ -31,17 +31,17 @@
       --bg-secondary: rgba(0, 0, 0, 0.05);
       --text-primary: #0d0d0d;
       --text-secondary: rgba(0, 0, 0, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(0, 0, 0, 0.1);
       --border-color: rgba(0, 0, 0, 0.3);
       --nav-bg: rgba(255, 255, 255, 0.8);
       --particle-color: #000000;
-      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+      --pepper-colors: #FF00AA, #0077ff, #000000, #ff9900;
       --modal-bg: #f5f5f5;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.4);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.4);
     }
 
     body {
@@ -151,7 +151,9 @@
     }
     
     .navbar a:hover {
-      color: var(--accent-color);
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .navbar a::before {
@@ -276,7 +278,9 @@
       }
       
       .navbar a:hover {
-        background: rgba(255, 0, 204, 0.1);
+        background: rgba(255, 0, 170, 0.1);
+        -webkit-background-clip: initial;
+        -webkit-text-fill-color: initial;
       }
       
       .menu-toggle.active span:nth-child(1) {
@@ -391,13 +395,13 @@
       color: white;
       font-weight: bold;
       transition: 0.3s;
-      box-shadow: 0px 0px 15px rgba(255, 0, 200, 0.5);
+      box-shadow: 0px 0px 15px var(--download-btn-glow);
       cursor: pointer;
     }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0px 0px 25px rgba(255, 0, 200, 0.9);
+      box-shadow: 0px 0px 25px var(--download-btn-glow);
     }
 
     /* Particles Background */
@@ -480,7 +484,7 @@
     }
     .tool-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 8px 25px var(--download-btn-glow);
       background: rgba(255, 255, 255, 0.15);
     }
     .tool-card h3 {
@@ -497,7 +501,9 @@
     .tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
-      color: #ff00cc;
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       height: 60px;
       display: flex;
       align-items: center;
@@ -533,7 +539,7 @@
       border-radius: 15px;
       padding: 30px;
       position: relative;
-      box-shadow: 0 0 35px rgba(255, 0, 200, 0.5);
+      box-shadow: 0 0 35px var(--download-btn-glow);
       border: 1px solid var(--modal-border);
     }
     
@@ -548,7 +554,9 @@
     }
     
     .close-btn:hover {
-      color: #ff00cc;
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .modal-title {
@@ -590,7 +598,9 @@
       display: block;
       margin-top: 10px;
       font-size: 16px;
-      color: var(--accent-color);
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       word-wrap: break-word;
       max-width: 100%;
       text-overflow: ellipsis;
@@ -609,13 +619,13 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 0 15px var(--download-btn-glow);
       margin-top: 15px;
     }
     
     .modal-action-btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255, 0, 200, 0.7);
+      box-shadow: 0 0 25px var(--download-btn-glow);
     }
     
     /* File list */
@@ -791,6 +801,28 @@
       border-color: var(--accent-color);
       box-shadow: 0 0 5px var(--download-btn-glow);
     }
+
+    /* Options Modal */
+    .options-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .options-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
   </style>
 </head>
 <body>
@@ -813,6 +845,9 @@
             <a href="#tools">TOOLS</a>
             <div class="dropdown-menu">
               <a href="#pdf-tools">PDF TOOLS</a>
+              <a href="#finance-tools">FINANCE TOOLS</a>
+              <a href="#image-tools">IMAGE TOOLS</a>
+              <a href="#utilities-tools">UTILITIES TOOLS</a>
             </div>
           </li>
           <li><a href="#faq">FAQ</a></li>
@@ -860,7 +895,7 @@
           <i class="fas fa-cloud-upload-alt"></i>
         </div>
         <p class="modal-upload-text">
-          <label for="fileInput" style="cursor: pointer; color:#000000;">Choose PDF File</label>
+          <label for="fileInput" style="cursor: pointer;">Choose PDF File</label>
         </p>
         <span id="selectedFileName">No file chosen</span>
         <p class="modal-upload-hint" id="uploadHint">Select a PDF file to add page numbers</p>
@@ -870,7 +905,16 @@
       <!-- File list -->
       <div class="file-list" id="fileList"></div>
       
-      <!-- Page Number Options -->
+      <button class="modal-action-btn" id="processBtn">Add Page Numbers</button>
+    </div>
+  </div>
+
+  <!-- Options Modal -->
+  <div class="options-modal" id="optionsModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeOptionsModal()">&times;</span>
+      <h2 class="modal-title">Page Number Options</h2>
+      
       <div class="tool-options" id="toolOptions">
         <div class="tool-option">
           <label for="position">Page Number Position:</label>
@@ -900,7 +944,7 @@
         <div class="progress-bar" id="progressBar"></div>
       </div>
       
-      <button class="modal-action-btn" id="processBtn">Add Page Numbers</button>
+      <button class="modal-action-btn" id="processOptionsBtn">Process</button>
       <a class="download-btn" id="downloadBtn" download><i class="fas fa-download"></i> Download Result</a>
     </div>
   </div>
@@ -915,14 +959,6 @@
     
     body.setAttribute('data-theme', savedTheme);
     updateParticles(savedTheme);
-    
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      body.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateParticles(newTheme);
-    });
     
     function updateParticles(theme) {
       const particlesConfig = {
@@ -956,6 +992,14 @@
         particlesJS("particles-js", particlesConfig);
       }
     }
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateParticles(newTheme);
+    });
 
     // Mobile Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
@@ -1020,8 +1064,8 @@
       pepper.style.left = Math.random() * window.innerWidth + "px";
       const theme = body.getAttribute('data-theme');
       const colors = theme === 'dark' 
-        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
-        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+        ? ["#FF00AA", "#00ffff", "#ffffff", "#ffcc00"] 
+        : ["#FF00AA", "#0077ff", "#000000", "#ff9900"];
       pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
       pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(pepper);
@@ -1056,6 +1100,7 @@
     // PDF Add Page Number Modal Functions
     let currentTool = '';
     let uploadedFiles = [];
+    let lastDownloadUrl = null; // Track last download URL
     
     const selectedFileNameDisplay = document.getElementById('selectedFileName');
     
@@ -1067,31 +1112,59 @@
       document.getElementById('uploadHint').textContent = 'Select a PDF file to add page numbers';
       
       document.getElementById('pdfModal').classList.add('active');
-      document.getElementById('downloadBtn').classList.add('pulse');
     }
     
     function closePdfModal() {
       document.getElementById('pdfModal').classList.remove('active');
-      document.getElementById('downloadBtn').classList.remove('pulse');
       resetModal();
     }
     
     function resetModal() {
+      // Revoke previous download URL if it exists
+      if (lastDownloadUrl) {
+        URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = null;
+      }
+      
       uploadedFiles = [];
       document.getElementById('fileList').innerHTML = '';
       document.getElementById('uploadArea').classList.remove('active');
       document.getElementById('progressContainer').style.display = 'none';
       document.getElementById('progressBar').style.width = '0%';
       document.getElementById('processBtn').style.display = 'block';
+      document.getElementById('processBtn').disabled = false;
       document.getElementById('downloadBtn').style.display = 'none';
       document.getElementById('fileInput').value = '';
       selectedFileNameDisplay.textContent = 'No file chosen';
+      closeOptionsModal();
+    }
+    
+    function openOptionsModal() {
+      document.getElementById('optionsModal').classList.add('active');
+      // Reset options to default
+      document.getElementById('position').value = 'bottom-right';
+      document.getElementById('fontSize').value = '12';
+      document.getElementById('fontColor').value = '#000000';
+      document.getElementById('startNumber').value = '1';
+      document.getElementById('downloadBtn').style.display = 'none';
+      document.getElementById('processOptionsBtn').style.display = 'block';
+    }
+    
+    function closeOptionsModal() {
+      document.getElementById('optionsModal').classList.remove('active');
+      document.getElementById('progressContainer').style.display = 'none';
+      document.getElementById('progressBar').style.width = '0%';
+      document.getElementById('processOptionsBtn').disabled = false;
+      document.getElementById('downloadBtn').style.display = 'none';
     }
     
     window.addEventListener('click', function(event) {
       const pdfModal = document.getElementById('pdfModal');
+      const optionsModal = document.getElementById('optionsModal');
       if (event.target === pdfModal) {
         closePdfModal();
+      } else if (event.target === optionsModal) {
+        closeOptionsModal();
       }
     });
     
@@ -1103,6 +1176,7 @@
     const downloadBtn = document.getElementById('downloadBtn');
     const progressContainer = document.getElementById('progressContainer');
     const progressBar = document.getElementById('progressBar');
+    const processOptionsBtn = document.getElementById('processOptionsBtn');
     
     uploadArea.addEventListener('click', (e) => {
       if (e.target !== fileInput) {
@@ -1196,27 +1270,44 @@
       }
     }
     
-    processBtn.addEventListener('click', async () => {
+    processBtn.addEventListener('click', () => {
+      if (uploadedFiles.length === 0) {
+        alert('Please select a PDF file to add page numbers');
+        return;
+      }
+      
+      openOptionsModal();
+    });
+    
+    processOptionsBtn.addEventListener('click', async () => {
       if (uploadedFiles.length === 0) {
         alert('Please select a PDF file to add page numbers');
         return;
       }
       
       progressContainer.style.display = 'block';
-      processBtn.disabled = true;
+      processOptionsBtn.disabled = true;
+      processOptionsBtn.style.display = 'none';
       
       try {
         const result = await addPageNumbers();
         progressBar.style.width = '100%';
-        processBtn.style.display = 'none';
-        downloadBtn.style.display = 'block';
+        processOptionsBtn.disabled = false;
+        document.getElementById('downloadBtn').style.display = 'block';
+        // Revoke previous URL if it exists
+        if (lastDownloadUrl) {
+          URL.revokeObjectURL(lastDownloadUrl);
+        }
+        lastDownloadUrl = result;
         downloadBtn.href = result;
         downloadBtn.download = 'numbered_pdf.pdf';
         downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Result';
       } catch (error) {
         console.error('Error adding page numbers:', error);
         alert('Error adding page numbers: ' + error.message);
-        processBtn.disabled = false;
+        processOptionsBtn.disabled = false;
+        processOptionsBtn.style.display = 'block';
+        document.getElementById('downloadBtn').style.display = 'none';
         progressBar.style.width = '0%';
         progressContainer.style.display = 'none';
       }
