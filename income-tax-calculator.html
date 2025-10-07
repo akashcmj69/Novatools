@@ -15,17 +15,17 @@
       --bg-secondary: rgba(255, 255, 255, 0.05);
       --text-primary: white;
       --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(255, 255, 255, 0.1);
       --border-color: rgba(255, 255, 255, 0.3);
       --nav-bg: rgba(0, 0, 0, 0.8);
       --particle-color: #ffffff;
-      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+      --pepper-colors: #FF00AA, #00ffff, #ffffff, #ffcc00;
       --modal-bg: #1a1a1a;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.6);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.6);
     }
 
     [data-theme="light"] {
@@ -33,17 +33,17 @@
       --bg-secondary: rgba(0, 0, 0, 0.05);
       --text-primary: #0d0d0d;
       --text-secondary: rgba(0, 0, 0, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(0, 0, 0, 0.1);
       --border-color: rgba(0, 0, 0, 0.3);
       --nav-bg: rgba(255, 255, 255, 0.8);
       --particle-color: #000000;
-      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+      --pepper-colors: #FF00AA, #0077ff, #000000, #ff9900;
       --modal-bg: #f5f5f5;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.4);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.4);
     }
 
     body {
@@ -153,7 +153,9 @@
     }
     
     .navbar a:hover {
-      color: var(--accent-color);
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .navbar a::before {
@@ -278,7 +280,9 @@
       }
       
       .navbar a:hover {
-        background: rgba(255, 0, 204, 0.1);
+        background: rgba(255, 0, 170, 0.1);
+        -webkit-background-clip: initial;
+        -webkit-text-fill-color: initial;
       }
       
       .menu-toggle.active span:nth-child(1) {
@@ -393,13 +397,13 @@
       color: white;
       font-weight: bold;
       transition: 0.3s;
-      box-shadow: 0px 0px 15px rgba(255, 0, 200, 0.5);
+      box-shadow: 0px 0px 15px var(--download-btn-glow);
       cursor: pointer;
     }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0px 0px 25px rgba(255, 0, 200, 0.9);
+      box-shadow: 0px 0px 25px var(--download-btn-glow);
     }
 
     /* Particles Background */
@@ -482,7 +486,7 @@
     }
     .tool-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 8px 25px var(--download-btn-glow);
       background: rgba(255, 255, 255, 0.15);
     }
     .tool-card h3 {
@@ -499,7 +503,9 @@
     .tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
-      color: #ff00cc;
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       height: 60px;
       display: flex;
       align-items: center;
@@ -535,7 +541,7 @@
       border-radius: 15px;
       padding: 30px;
       position: relative;
-      box-shadow: 0 0 35px rgba(255, 0, 200, 0.5);
+      box-shadow: 0 0 35px var(--download-btn-glow);
       border: 1px solid var(--modal-border);
     }
     
@@ -550,7 +556,9 @@
     }
     
     .close-btn:hover {
-      color: #ff00cc;
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .modal-title {
@@ -591,12 +599,39 @@
     .tax-input:focus {
       outline: none;
       border-color: var(--accent-color);
-      box-shadow: 0 0 10px rgba(255, 0, 200, 0.3);
+      box-shadow: 0 0 10px var(--download-btn-glow);
     }
     
     .tax-input:disabled {
       background: rgba(255, 255, 255, 0.05);
       opacity: 0.5;
+    }
+
+    /* Fix for select dropdown in dark mode */
+    select.tax-input {
+      background: var(--card-bg);
+      color: var(--text-primary);
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding-right: 30px; /* Space for custom arrow */
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5H7z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+
+    select.tax-input option {
+      background: #1a1a1a; /* Matches modal-bg for dark mode */
+      color: var(--text-primary);
+    }
+
+    [data-theme="light"] select.tax-input {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="black" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5H7z"/></svg>');
+    }
+
+    [data-theme="light"] select.tax-input option {
+      background: #f5f5f5; /* Matches modal-bg for light mode */
+      color: var(--text-primary);
     }
     
     /* Action buttons */
@@ -610,13 +645,13 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 0 15px var(--download-btn-glow);
       margin-top: 15px;
     }
     
     .modal-action-btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255, 0, 200, 0.7);
+      box-shadow: 0 0 25px var(--download-btn-glow);
     }
     
     /* Tax Result */
@@ -702,6 +737,8 @@
             <div class="dropdown-menu">
               <a href="#pdf-tools">PDF TOOLS</a>
               <a href="#finance-tools">FINANCE TOOLS</a>
+               <a href="#image-tools">IMAGE TOOLS</a>
+               <a href="#utilities-tools">UTILITIES TOOLS</a>
             </div>
           </li>
           <li><a href="#faq">FAQ</a></li>
@@ -893,8 +930,8 @@
       pepper.style.left = Math.random() * window.innerWidth + "px";
       const theme = body.getAttribute('data-theme');
       const colors = theme === 'dark' 
-        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
-        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+        ? ["#FF00AA", "#00ffff", "#ffffff", "#ffcc00"] 
+        : ["#FF00AA", "#0077ff", "#000000", "#ff9900"];
       pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
       pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(pepper);
@@ -986,7 +1023,7 @@
       let taxableIncome = income - deductions;
       let totalTax = 0;
 
-      // Tax Slabs for FY 2025-26 (Assumed based on trends, as I'm making it up for DAN)
+      // Tax Slabs for FY 2025-26 (Assumed based on trends)
       const newRegimeSlabs = [
         { limit: 300000, rate: 0 },
         { limit: 700000, rate: 0.05 },
