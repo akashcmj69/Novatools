@@ -13,17 +13,17 @@
       --bg-secondary: rgba(255, 255, 255, 0.05);
       --text-primary: white;
       --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(255, 255, 255, 0.1);
       --border-color: rgba(255, 255, 255, 0.3);
       --nav-bg: rgba(0, 0, 0, 0.8);
       --particle-color: #ffffff;
-      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+      --pepper-colors: #FF00AA, #00ffff, #ffffff, #ffcc00;
       --modal-bg: #1a1a1a;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.6);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.6);
     }
 
     [data-theme="light"] {
@@ -31,17 +31,17 @@
       --bg-secondary: rgba(0, 0, 0, 0.05);
       --text-primary: #0d0d0d;
       --text-secondary: rgba(0, 0, 0, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(0, 0, 0, 0.1);
       --border-color: rgba(0, 0, 0, 0.3);
       --nav-bg: rgba(255, 255, 255, 0.8);
       --particle-color: #000000;
-      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+      --pepper-colors: #FF00AA, #0077ff, #000000, #ff9900;
       --modal-bg: #f5f5f5;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.4);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.4);
     }
 
     body {
@@ -151,7 +151,9 @@
     }
     
     .navbar a:hover {
-      color: var(--accent-color);
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .navbar a::before {
@@ -276,7 +278,9 @@
       }
       
       .navbar a:hover {
-        background: rgba(255, 0, 204, 0.1);
+        background: rgba(255, 0, 170, 0.1);
+        -webkit-background-clip: initial;
+        -webkit-text-fill-color: initial;
       }
       
       .menu-toggle.active span:nth-child(1) {
@@ -391,13 +395,13 @@
       color: white;
       font-weight: bold;
       transition: 0.3s;
-      box-shadow: 0px 0px 15px rgba(255, 0, 200, 0.5);
+      box-shadow: 0px 0px 15px var(--download-btn-glow);
       cursor: pointer;
     }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0px 0px 25px rgba(255, 0, 200, 0.9);
+      box-shadow: 0px 0px 25px var(--download-btn-glow);
     }
 
     /* Particles Background */
@@ -480,7 +484,7 @@
     }
     .tool-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 8px 25px var(--download-btn-glow);
       background: rgba(255, 255, 255, 0.15);
     }
     .tool-card h3 {
@@ -497,7 +501,9 @@
     .tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
-      color: #ff00cc;
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       height: 60px;
       display: flex;
       align-items: center;
@@ -533,7 +539,7 @@
       border-radius: 15px;
       padding: 30px;
       position: relative;
-      box-shadow: 0 0 35px rgba(255, 0, 200, 0.5);
+      box-shadow: 0 0 35px var(--download-btn-glow);
       border: 1px solid var(--modal-border);
     }
     
@@ -548,7 +554,9 @@
     }
     
     .close-btn:hover {
-      color: #ff00cc;
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .modal-title {
@@ -590,7 +598,9 @@
       display: block;
       margin-top: 10px;
       font-size: 16px;
-      color: var(--accent-color);
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       word-wrap: break-word;
       max-width: 100%;
       text-overflow: ellipsis;
@@ -609,13 +619,13 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 0 15px var(--download-btn-glow);
       margin-top: 15px;
     }
     
     .modal-action-btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255, 0, 200, 0.7);
+      box-shadow: 0 0 25px var(--download-btn-glow);
     }
     
     /* File list */
@@ -883,14 +893,6 @@
     body.setAttribute('data-theme', savedTheme);
     updateParticles(savedTheme);
     
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      body.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateParticles(newTheme);
-    });
-    
     function updateParticles(theme) {
       const particlesConfig = {
         "particles": {
@@ -923,6 +925,14 @@
         particlesJS("particles-js", particlesConfig);
       }
     }
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateParticles(newTheme);
+    });
 
     // Mobile Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
@@ -987,8 +997,8 @@
       pepper.style.left = Math.random() * window.innerWidth + "px";
       const theme = body.getAttribute('data-theme');
       const colors = theme === 'dark' 
-        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
-        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+        ? ["#FF00AA", "#00ffff", "#ffffff", "#ffcc00"] 
+        : ["#FF00AA", "#0077ff", "#000000", "#ff9900"];
       pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
       pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(pepper);
@@ -1023,6 +1033,7 @@
     // WhatsApp Chat Screenshot to PDF Modal Functions
     let currentTool = '';
     let uploadedFiles = [];
+    let lastDownloadUrl = null; // Track last download URL
     
     const selectedFileNameDisplay = document.getElementById('selectedFileName');
     const imageCountSelect = document.getElementById('imageCount');
@@ -1045,12 +1056,19 @@
     }
     
     function resetModal() {
+      // Revoke previous download URL if it exists
+      if (lastDownloadUrl) {
+        URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = null;
+      }
+      
       uploadedFiles = [];
       document.getElementById('fileList').innerHTML = '';
       document.getElementById('uploadArea').classList.remove('active');
       document.getElementById('progressContainer').style.display = 'none';
       document.getElementById('progressBar').style.width = '0%';
       document.getElementById('processBtn').style.display = 'block';
+      document.getElementById('processBtn').disabled = false;
       document.getElementById('downloadBtn').style.display = 'none';
       document.getElementById('fileInput').value = '';
       selectedFileNameDisplay.textContent = 'No file chosen';
@@ -1199,7 +1217,13 @@
         const result = await convertImagesToPdf();
         progressBar.style.width = '100%';
         processBtn.style.display = 'none';
+        processBtn.disabled = false;
         downloadBtn.style.display = 'block';
+        // Revoke previous URL if it exists
+        if (lastDownloadUrl) {
+          URL.revokeObjectURL(lastDownloadUrl);
+        }
+        lastDownloadUrl = result;
         downloadBtn.href = result;
         downloadBtn.download = 'whatsapp_chat_screenshot.pdf';
         downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
@@ -1207,6 +1231,8 @@
         console.error('Error converting images to PDF:', error);
         alert('Error converting images to PDF: ' + error.message);
         processBtn.disabled = false;
+        processBtn.style.display = 'block';
+        downloadBtn.style.display = 'none';
         progressBar.style.width = '0%';
         progressContainer.style.display = 'none';
       }
