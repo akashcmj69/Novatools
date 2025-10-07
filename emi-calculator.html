@@ -15,17 +15,17 @@
       --bg-secondary: rgba(255, 255, 255, 0.05);
       --text-primary: white;
       --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(255, 255, 255, 0.1);
       --border-color: rgba(255, 255, 255, 0.3);
       --nav-bg: rgba(0, 0, 0, 0.8);
       --particle-color: #ffffff;
-      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+      --pepper-colors: #FF00AA, #00ffff, #ffffff, #ffcc00;
       --modal-bg: #1a1a1a;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.6);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.6);
     }
 
     [data-theme="light"] {
@@ -33,17 +33,17 @@
       --bg-secondary: rgba(0, 0, 0, 0.05);
       --text-primary: #0d0d0d;
       --text-secondary: rgba(0, 0, 0, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(0, 0, 0, 0.1);
       --border-color: rgba(0, 0, 0, 0.3);
       --nav-bg: rgba(255, 255, 255, 0.8);
       --particle-color: #000000;
-      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+      --pepper-colors: #FF00AA, #0077ff, #000000, #ff9900;
       --modal-bg: #f5f5f5;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --download-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --download-btn-glow: rgba(255, 0, 200, 0.4);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --download-btn-glow: rgba(255, 0, 170, 0.4);
     }
 
     body {
@@ -151,7 +151,9 @@
     }
     
     .navbar a:hover {
-      color: var(--accent-color);
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .navbar a::before {
@@ -273,7 +275,9 @@
       }
       
       .navbar a:hover {
-        background: rgba(255, 0, 204, 0.1);
+        background: rgba(255, 0, 170, 0.1);
+        -webkit-background-clip: initial;
+        -webkit-text-fill-color: initial;
       }
       
       .menu-toggle.active span:nth-child(1) {
@@ -387,13 +391,13 @@
       color: white;
       font-weight: bold;
       transition: 0.3s;
-      box-shadow: 0px 0px 15px rgba(255, 0, 200, 0.5);
+      box-shadow: 0px 0px 15px var(--download-btn-glow);
       cursor: pointer;
     }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0px 0px 25px rgba(255, 0, 200, 0.9);
+      box-shadow: 0px 0px 25px var(--download-btn-glow);
     }
 
     #particles-js {
@@ -473,7 +477,7 @@
     }
     .tool-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 8px 25px var(--download-btn-glow);
       background: rgba(255, 255, 255, 0.15);
     }
     .tool-card h3 {
@@ -490,7 +494,9 @@
     .tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
-      color: #ff00cc;
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       height: 60px;
       display: flex;
       align-items: center;
@@ -525,7 +531,7 @@
       border-radius: 15px;
       padding: 30px;
       position: relative;
-      box-shadow: 0 0 35px rgba(255, 0, 200, 0.5);
+      box-shadow: 0 0 35px var(--download-btn-glow);
       border: 1px solid var(--modal-border);
     }
     
@@ -540,7 +546,9 @@
     }
     
     .close-btn:hover {
-      color: #ff00cc;
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .modal-title {
@@ -572,7 +580,7 @@
       font-size: 16px;
       border: 1px solid var(--border-color);
       border-radius: 5px;
-      background: var(--card-bg);
+      background: var(--bg-primary);
       color: var(--text-primary);
       transition: all 0.3s ease;
     }
@@ -580,7 +588,7 @@
     .emi-input:focus {
       outline: none;
       border-color: var(--accent-color);
-      box-shadow: 0 0 10px rgba(255, 0, 200, 0.3);
+      box-shadow: 0 0 10px var(--download-btn-glow);
     }
     
     .modal-action-btn {
@@ -593,13 +601,13 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 0 15px var(--download-btn-glow);
       margin-top: 15px;
     }
     
     .modal-action-btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255, 0, 200, 0.7);
+      box-shadow: 0 0 25px var(--download-btn-glow);
     }
     
     .emi-result {
@@ -681,6 +689,8 @@
             <div class="dropdown-menu">
               <a href="#pdf-tools">PDF TOOLS</a>
               <a href="#finance-tools">FINANCE TOOLS</a>
+              <a href="#image-tools">IMAGE TOOLS</a>
+              <a href="#utilities-tools">UTILITIES TOOLS</a>
             </div>
           </li>
           <li><a href="#faq">FAQ</a></li>
@@ -719,6 +729,14 @@
       <span class="close-btn" onclick="closeEmiModal()">&times;</span>
       <h2 class="modal-title">Advanced EMI Calculator (FY 2025-26)</h2>
       <div class="emi-input-area">
+        <div class="emi-input-group">
+          <label class="emi-label" for="loanTypeSelect">Loan Type:</label>
+          <select id="loanTypeSelect" class="emi-input">
+            <option value="personal">Personal Loan</option>
+            <option value="car">Car Loan</option>
+            <option value="home">Home Loan</option>
+          </select>
+        </div>
         <div class="emi-input-group">
           <label class="emi-label" for="principalInput">Loan Amount (₹):</label>
           <input type="number" id="principalInput" class="emi-input" placeholder="Enter loan principal amount" required>
@@ -853,8 +871,8 @@
       pepper.style.left = Math.random() * window.innerWidth + "px";
       const theme = body.getAttribute('data-theme');
       const colors = theme === 'dark' 
-        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
-        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+        ? ["#FF00AA", "#00ffff", "#ffffff", "#ffcc00"] 
+        : ["#FF00AA", "#0077ff", "#000000", "#ff9900"];
       pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
       pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(pepper);
@@ -886,6 +904,7 @@
 
     // EMI Calculator Functions
     const emiModal = document.getElementById('emiModal');
+    const loanTypeSelect = document.getElementById('loanTypeSelect');
     const principalInput = document.getElementById('principalInput');
     const interestRateInput = document.getElementById('interestRateInput');
     const tenureInput = document.getElementById('tenureInput');
@@ -906,8 +925,9 @@
     }
 
     function resetEmiModal() {
+      loanTypeSelect.value = 'personal';
       principalInput.value = '';
-      interestRateInput.value = '';
+      interestRateInput.value = '12';
       tenureInput.value = '';
       emiResult.style.display = 'none';
     }
@@ -915,6 +935,21 @@
     window.addEventListener('click', function(event) {
       if (event.target === emiModal) {
         closeEmiModal();
+      }
+    });
+
+    // Set default interest rate based on loan type
+    loanTypeSelect.addEventListener('change', () => {
+      switch (loanTypeSelect.value) {
+        case 'personal':
+          interestRateInput.value = '12';
+          break;
+        case 'car':
+          interestRateInput.value = '8';
+          break;
+        case 'home':
+          interestRateInput.value = '7';
+          break;
       }
     });
 
