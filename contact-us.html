@@ -15,17 +15,17 @@
       --bg-secondary: rgba(255, 255, 255, 0.05);
       --text-primary: white;
       --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(255, 255, 255, 0.1);
       --border-color: rgba(255, 255, 255, 0.3);
       --nav-bg: rgba(0, 0, 0, 0.8);
       --particle-color: #ffffff;
-      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+      --pepper-colors: #FF00AA, #0000FF, #ffffff, #00ffff;
       --form-bg: rgba(255, 255, 255, 0.1);
       --form-border: rgba(255, 255, 255, 0.3);
-      --button-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --button-glow: rgba(255, 0, 200, 0.6);
+      --button-bg: linear-gradient(90deg, #FF00AA, #0000FF);
+      --button-glow: rgba(255, 0, 170, 0.6);
     }
 
     [data-theme="light"] {
@@ -33,17 +33,17 @@
       --bg-secondary: rgba(0, 0, 0, 0.05);
       --text-primary: #0d0d0d;
       --text-secondary: rgba(0, 0, 0, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(0, 0, 0, 0.1);
       --border-color: rgba(0, 0, 0, 0.3);
       --nav-bg: rgba(255, 255, 255, 0.8);
       --particle-color: #000000;
-      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+      --pepper-colors: #FF00AA, #0000FF, #000000, #0077ff;
       --form-bg: rgba(0, 0, 0, 0.1);
       --form-border: rgba(0, 0, 0, 0.3);
-      --button-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --button-glow: rgba(255, 0, 200, 0.4);
+      --button-bg: linear-gradient(90deg, #FF00AA, #0000FF);
+      --button-glow: rgba(255, 0, 170, 0.4);
     }
 
     body {
@@ -153,7 +153,9 @@
     }
     
     .navbar a:hover {
-      color: var(--accent-color);
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .navbar a::before {
@@ -174,7 +176,7 @@
       left: 50%;
       width: 0;
       height: 2px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       transition: width 0.3s ease, left 0.3s ease;
     }
     
@@ -278,7 +280,7 @@
       }
       
       .navbar a:hover {
-        background: rgba(255, 0, 204, 0.1);
+        background: rgba(255, 0, 170, 0.1);
       }
       
       .menu-toggle.active span:nth-child(1) {
@@ -407,7 +409,7 @@
       display: block;
       width: 100px;
       height: 3px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       margin: 10px auto 0;
     }
     .contact-section p {
@@ -418,11 +420,15 @@
       text-align: center;
     }
     .contact-section a {
-      color: var(--accent-color);
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       text-decoration: none;
     }
     .contact-section a:hover {
-      text-decoration: underline;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     /* Form Styles */
@@ -540,17 +546,11 @@
       
       <div class="nav-right">
         <ul id="navMenu">
-          <li><a href="#home">HOME</a></li>
+          <li><a href="https://akashcmj69.github.io/Novatools/">HOME</a></li>
           <li class="dropdown">
-            <a href="#tools">TOOLS</a>
-            <div class="dropdown-menu">
-              <a href="#pdf-tools">PDF TOOLS</a>
-            </div>
+            
           </li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#how-to-use">HOW TO USE</a></li>
-          <li><a href="#about">ABOUT US</a></li>
-         
+          <li><a href="https://akashcmj69.github.io/Novatools/about-us.html">ABOUT US</a></li>
         </ul>
         
         <!-- Theme Toggle -->
@@ -711,8 +711,8 @@
       pepper.style.left = Math.random() * window.innerWidth + "px";
       const theme = body.getAttribute('data-theme');
       const colors = theme === 'dark' 
-        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
-        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+        ? ["#FF00AA", "#0000FF", "#ffffff", "#00ffff"] 
+        : ["#FF00AA", "#0000FF", "#000000", "#0077ff"];
       pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
       pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(pepper);
