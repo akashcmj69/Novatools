@@ -15,17 +15,17 @@
       --bg-secondary: rgba(255, 255, 255, 0.05);
       --text-primary: white;
       --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(255, 255, 255, 0.1);
       --border-color: rgba(255, 255, 255, 0.3);
       --nav-bg: rgba(0, 0, 0, 0.8);
       --particle-color: #ffffff;
-      --pepper-colors: #ff00cc, #00ffff, #ffffff, #ffcc00;
+      --pepper-colors: #FF00AA, #00ffff, #ffffff, #ffcc00;
       --modal-bg: #1a1a1a;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --action-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --action-btn-glow: rgba(255, 0, 200, 0.6);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --action-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
+      --action-btn-glow: rgba(255, 0, 170, 0.6);
     }
 
     [data-theme="light"] {
@@ -33,17 +33,16 @@
       --bg-secondary: rgba(0, 0, 0, 0.05);
       --text-primary: #0d0d0d;
       --text-secondary: rgba(0, 0, 0, 0.85);
-      --accent-color: #ff00cc;
-      --accent-gradient: linear-gradient(90deg, #ff00cc, #3333ff);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(0, 0, 0, 0.1);
       --border-color: rgba(0, 0, 0, 0.3);
       --nav-bg: rgba(255, 255, 255, 0.8);
       --particle-color: #000000;
-      --pepper-colors: #ff00cc, #0077ff, #000000, #ff9900;
+      --pepper-colors: #FF00AA, #0077ff, #000000, #ff9900;
       --modal-bg: #f5f5f5;
-      --modal-border: rgba(255, 0, 200, 0.3);
-      --action-btn-bg: linear-gradient(45deg, #ff00cc, #00ccff);
-      --action-btn-glow: rgba(255, 0, 200, 0.4);
+      --modal-border: rgba(255, 0, 170, 0.3);
+      --action-btn-glow: rgba(255, 0, 170, 0.4);
     }
 
     body {
@@ -153,7 +152,9 @@
     }
     
     .navbar a:hover {
-      color: var(--accent-color);
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .navbar a::before {
@@ -174,7 +175,7 @@
       left: 50%;
       width: 0;
       height: 2px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       transition: width 0.3s ease, left 0.3s ease;
     }
     
@@ -275,7 +276,7 @@
       }
       
       .navbar a:hover {
-        background: rgba(255, 0, 204, 0.1);
+        background: rgba(255, 0, 170, 0.1);
       }
       
       .menu-toggle.active span:nth-child(1) {
@@ -389,13 +390,13 @@
       color: white;
       font-weight: bold;
       transition: 0.3s;
-      box-shadow: 0px 0px 15px rgba(255, 0, 200, 0.5);
+      box-shadow: 0px 0px 15px rgba(255, 0, 170, 0.5);
       cursor: pointer;
     }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0px 0px 25px rgba(255, 0, 200, 0.9);
+      box-shadow: 0px 0px 25px rgba(255, 0, 170, 0.9);
     }
 
     #particles-js {
@@ -448,7 +449,7 @@
       display: block;
       width: 100px;
       height: 3px;
-      background: var(--accent-color);
+      background: var(--accent-gradient);
       margin: 10px auto 0;
     }
     .tools-grid {
@@ -475,7 +476,7 @@
     }
     .tool-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(255, 0, 200, 0.4);
+      box-shadow: 0 8px 25px rgba(255, 0, 170, 0.4);
       background: rgba(255, 255, 255, 0.15);
     }
     .tool-card h3 {
@@ -492,7 +493,9 @@
     .tool-icon {
       font-size: 40px;
       margin-bottom: 20px;
-      color: #ff00cc;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       height: 60px;
       display: flex;
       align-items: center;
@@ -527,7 +530,7 @@
       border-radius: 15px;
       padding: 30px;
       position: relative;
-      box-shadow: 0 0 35px rgba(255, 0, 200, 0.5);
+      box-shadow: 0 0 35px rgba(255, 0, 170, 0.5);
       border: 1px solid var(--modal-border);
       max-height: 80vh;
       overflow-y: auto;
@@ -544,7 +547,9 @@
     }
     
     .close-btn:hover {
-      color: #ff00cc;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .modal-title {
@@ -564,17 +569,17 @@
       color: var(--text-primary);
       font-size: 16px;
       resize: vertical;
-      margin: 0 auto 20px auto; /* Added auto margin to center and add gap on right */
-      max-width: 90%; /* Restrict width to leave gap on both sides */
+      margin: 0 auto 20px auto;
+      max-width: 90%;
       transition: all 0.3s ease;
       font-family: 'Poppins', sans-serif;
-      box-sizing: border-box; /* Ensure padding doesn't affect width */
+      box-sizing: border-box;
     }
     
     .modal-textarea:focus {
       outline: none;
-      border-color: var(--accent-color);
-      box-shadow: 0 0 10px rgba(255, 0, 200, 0.3);
+      border-color: var(--accent-gradient);
+      box-shadow: 0 0 10px rgba(255, 0, 170, 0.3);
     }
     
     .modal-upload-hint {
@@ -603,7 +608,9 @@
     .counter-value {
       font-size: 24px;
       font-weight: bold;
-      color: var(--accent-color);
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       display: block;
     }
     
@@ -704,7 +711,7 @@
       }
       
       .modal-textarea {
-        max-width: 100%; /* On mobile, full width but still centered */
+        max-width: 100%;
       }
     }
   </style>
@@ -917,8 +924,8 @@
       pepper.style.left = Math.random() * window.innerWidth + "px";
       const theme = body.getAttribute('data-theme');
       const colors = theme === 'dark' 
-        ? ["#ff00cc", "#00ffff", "#ffffff", "#ffcc00"] 
-        : ["#ff00cc", "#0077ff", "#000000", "#ff9900"];
+        ? ["#FF00AA", "#00ffff", "#ffffff", "#ffcc00"] 
+        : ["#FF00AA", "#0077ff", "#000000", "#ff9900"];
       pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
       pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(pepper);
