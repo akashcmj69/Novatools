@@ -24,13 +24,13 @@
       --bg-secondary: rgba(255, 255, 255, 0.05);
       --text-primary: white;
       --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent-color: #FF00AA;
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
       --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(255, 255, 255, 0.1);
       --border-color: rgba(255, 255, 255, 0.3);
       --nav-bg: rgba(0, 0, 0, 0.8);
       --particle-color: #ffffff;
-      --pepper-colors: #FF00AA, #00ffff, #ffffff, #0000FF;
+      --pepper-colors: #FF00AA, #0000FF, #ffffff, #00ffff;
       --modal-bg: #1a1a1a;
       --modal-border: rgba(255, 0, 170, 0.3);
       --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
@@ -41,13 +41,13 @@
       --bg-secondary: rgba(0, 0, 0, 0.05);
       --text-primary: #0d0d0d;
       --text-secondary: rgba(0, 0, 0, 0.85);
-      --accent-color: #FF00AA;
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
       --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
       --card-bg: rgba(0, 0, 0, 0.1);
       --border-color: rgba(0, 0, 0, 0.3);
       --nav-bg: rgba(255, 255, 255, 0.8);
       --particle-color: #000000;
-      --pepper-colors: #FF00AA, #0077ff, #000000, #0000FF;
+      --pepper-colors: #FF00AA, #0000FF, #000000, #0077ff;
       --modal-bg: #f5f5f5;
       --modal-border: rgba(255, 0, 170, 0.3);
       --download-btn-bg: linear-gradient(45deg, #FF00AA, #0000FF);
@@ -161,7 +161,9 @@
     }
 
     .navbar a:hover {
-      color: var(--accent-color);
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .navbar a::before {
@@ -341,7 +343,6 @@
         transform: translateX(23px);
       }
       
-      /* Mobile Dropdown Styles */
       .dropdown-menu {
         position: static;
         display: none;
@@ -566,6 +567,23 @@
       opacity: 0.7;
     }
 
+    /* Close Button for Modals (if added later) */
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     /* Footer Styles */
     .footer-container {
       display: flex;
@@ -590,7 +608,9 @@
     }
 
     .footer-links a:hover {
-      color: var(--accent-color);
+      background: var(--accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     /* Responsive Design */
@@ -836,15 +856,6 @@
           <p>Adjust the dimensions of your images.</p>
         </div>
       </a>
-      <a href="#" class="tool-link" aria-label="Background Remover Tool">
-        <div class="image-tool-card">
-          <div class="image-tool-icon">
-            <i class="fas fa-eraser"></i>
-          </div>
-          <h3>BG Remover</h3>
-          <p>Remove backgrounds from your images.</p>
-        </div>
-      </a>
     </div>
   </section>
   <!-- Utility Tools Section -->
@@ -1010,8 +1021,8 @@
       pepper.style.left = Math.random() * window.innerWidth + "px";
       const theme = body.getAttribute('data-theme');
       const colors = theme === 'dark' 
-        ? ["#FF00AA", "#00ffff", "#ffffff", "#0000FF"] 
-        : ["#FF00AA", "#0077ff", "#000000", "#0000FF"];
+        ? ["#FF00AA", "#0000FF", "#ffffff", "#00ffff"] 
+        : ["#FF00AA", "#0000FF", "#000000", "#0077ff"];
       pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
       pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(pepper);
