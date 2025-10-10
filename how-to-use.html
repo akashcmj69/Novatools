@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn how to navigate and use the Nova Tools landing page, including accessing sections, switching themes, and using the mobile menu.">
+  <meta name="keywords" content="Nova Tools, how to use, landing page guide, navigation, theme toggle, mobile menu, user guide">
+  <meta name="robots" content="index, follow">
+  <title>How to Use - Nova Tools</title>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    a, a:visited, a:active, a h3, a p {
+      text-decoration: none !important;
+      color: inherit !important;
+    }
+
+    :root {
+      --bg-primary: #0d0d0d;
+      --bg-secondary: rgba(255, 255, 255, 0.05);
+      --text-primary: white;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
+      --card-bg: rgba(255, 255, 255, 0.1);
+      --border-color: rgba(255, 255, 255, 0.3);
+      --nav-bg: rgba(0, 0, 0, 0.8);
+      --particle-color: #ffffff;
+      --pepper-colors: #FF00AA, #0000FF, #ffffff, #00ffff;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0f0f0;
+      --bg-secondary: rgba(0, 0, 0, 0.05);
+      --text-primary: #0d0d0d;
+      --text-secondary: rgba(0, 0, 0, 0.85);
+      --accent-color: linear-gradient(90deg, #FF00AA, #0000FF);
+      --accent-gradient: linear-gradient(90deg, #FF00AA, #0000FF);
+      --card-bg: rgba(0, 0, 0, 0.1);
+      --border-color: rgba(0, 0, 0, 0.3);
+      --nav-bg: rgba(255, 255, 255, 0.8);
+      --particle-color: #000000;
+      --pepper-colors: #FF00AA, #0000FF, #000000, #0077ff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      width: 50px;
+      height: 24px;
+      background: var(--card-bg);
+      border-radius: 50px;
+      padding: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      margin-left: 15px;
+    }
+    
+    .theme-toggle::before {
+      content: '';
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+      left: 0;
+    }
+    
+    [data-theme="light"] .theme-toggle::before {
+      transform: translateX(26px);
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(5px);
+      padding: 15px 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.5s ease;
+    }
+    
+    .nav-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+    
+    .logo {
+      color: var(--text-primary);
+      font-weight: bold;
+      font-size: 20px;
+      transition: color 0.5s ease;
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+    
+    .navbar li {
+      position: relative;
+    }
+    
+    .navbar a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 8px 15px;
+      border-radius: 20px;
+      transition: color 0.3s ease, transform 0.3s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .navbar a:hover {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .navbar a::before {
+      content: '→';
+      opacity: 0;
+      margin-right: 5px;
+      transition: opacity 0.3s ease;
+    }
+    
+    .navbar a:hover::before {
+      opacity: 1;
+    }
+    
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    
+    .navbar a:hover::after {
+      width: 100%;
+      left: 0;
+    }
+    
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(5px);
+      border-radius: 10px;
+      padding: 10px 0;
+      min-width: 200px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 14px;
+      text-align: left;
+      border-radius: 0;
+    }
+    
+    .dropdown-menu a::after {
+      bottom: 0;
+    }
+    
+    /* Mobile Menu Button */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 25px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 10;
+    }
+    
+    .menu-toggle span {
+      width: 100%;
+      height: 3px;
+      background: var(--text-primary);
+      border-radius: 5px;
+      transition: all 0.3s linear;
+      position: relative;
+      transform-origin: center;
+    }
+    
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+        margin-left: 15px;
+      }
+      
+      .nav-right ul {
+        position: fixed;
+        left: 0;
+        top: 0;
+        flex-direction: column;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        width: 70%;
+        height: 100vh;
+        padding: 80px 20px 20px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 9;
+        gap: 10px;
+      }
+      
+      .nav-right ul.active {
+        transform: translateX(0);
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+      }
+      
+      .navbar a {
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 18px;
+        justify-content: flex-start;
+      }
+      
+      .navbar a:hover {
+        background: rgba(255, 0, 170, 0.1);
+      }
+      
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 8px);
+      }
+      
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -8px);
+      }
+      
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 8;
+      }
+      
+      .overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      
+      .theme-toggle {
+        margin-left: 0;
+        width: 45px;
+        height: 22px;
+        margin-right: 15px;
+      }
+      
+      .theme-toggle::before {
+        width: 18px;
+        height: 18px;
+      }
+      
+      [data-theme="light"] .theme-toggle::before {
+        transform: translateX(23px);
+      }
+      
+      .dropdown-menu {
+        position: static;
+        display: none;
+        background: transparent;
+        box-shadow: none;
+        padding: 10px 20px;
+      }
+      
+      .dropdown.active .dropdown-menu {
+        display: block;
+      }
+      
+      .dropdown-menu a {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    }
+
+    /* Particles Background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    /* Falling Pepper (Confetti) */
+    .pepper {
+      position: fixed;
+      top: -10px;
+      width: 8px;
+      height: 8px;
+      background: var(--accent-color);
+      opacity: 0.8;
+      border-radius: 2px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    /* How to Use Section */
+    .how-to-use-section {
+      padding: 100px 20px 60px;
+      background: var(--bg-secondary);
+      z-index: 2;
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .how-to-use-section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .how-to-use-section h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .how-to-use-section h1::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: var(--accent-gradient);
+      margin: 10px auto 0;
+    }
+    .how-to-use-section h2 {
+      font-size: 20px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    .how-to-use-section p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    .how-to-use-section a {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+    .how-to-use-section a:hover {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Footer Styles */
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .footer-links a {
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .how-to-use-section h1 {
+        font-size: 28px;
+      }
+      .how-to-use-section h2 {
+        font-size: 18px;
+      }
+      .how-to-use-section p {
+        font-size: 14px;
+      }
+      .footer-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .footer-links a {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particles -->
+  <div id="particles-js"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh69rlCA3VUszqOQVdIfbVHjGCjhKDh46XWYjUnrpM-f99Xb2f0nlkHcbRekr36LAkYTjGMKk-Oq-_e5Fu9UkRQTcW1vuyDTejMhCstBF9_0BRZ1CB9lylUwnFO7mGVRDURkAwxsAWdjGnt9gLWI8VcgUKPQ2d1YwJdf4wNBu-VqScVud5yPwx5RoVsyXPa/s320/akiii.png.jpg" 
+        alt="Logo" style="height:30px; vertical-align:middle; margin-right:8px;">
+        Nova Tools
+      </div>
+      
+      <div class="nav-right">
+        <ul id="navMenu">
+          <li><a href="https://akashcmj69.github.io/Novatools/">HOME</a></li>
+          <li class="dropdown">
+            
+          <li><a href="about-us.html">ABOUT US</a></li>
+        </ul>
+        
+        <!-- Theme Toggle -->
+        <div class="theme-toggle" id="themeToggle"></div>
+      </div>
+      
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Overlay for mobile menu -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- How to Use Section -->
+  <section class="how-to-use-section" id="how-to-use">
+    <h1>How to Use the Nova Tools</h1>
+    <p>Last Updated: October 09, 2025</p>
+    
+    <h2>1. Navigating the Website</h2>
+    <p>The navigation bar at the top of the page allows you to access different sections of Nova Tools. Click on links like "Home," "Tools," "FAQ," "How to Use," or "About Us" to explore the website. The "Tools" link includes a dropdown menu with categories such as PDF Tools, Finance Tools, Image Tools, and Utilities, which you can access by hovering over it (or clicking on mobile devices).</p>
+    
+    <h2>2. Using the Theme Toggle</h2>
+    <p>Nova Tools supports both dark and light themes for better visibility and comfort. To switch themes, click the theme toggle switch located in the top-right corner of the navigation bar. Your theme preference is saved, so the website will load in your chosen theme on future visits.</p>
+    
+    <h2>3. Accessing the Mobile Menu</h2>
+    <p>On mobile devices, the navigation bar collapses into a hamburger menu icon (three horizontal lines) in the top-right corner. Tap the icon to open the menu, which slides in from the left. Tap the icon again or click the overlay to close the menu. You can also access the Tools dropdown by tapping the "Tools" link in the mobile menu.</p>
+    
+    <h2>4. Exploring Sections</h2>
+    <p>The landing page is divided into sections, including a hero section with a welcome message and an "Explore All Tools" button. Clicking this button smoothly scrolls to the tools section. Each section (e.g., PDF Tools, Finance Tools) is accessible via the navigation bar or by scrolling down the page. Links in the navigation bar, such as "FAQ" or "About Us," take you to dedicated pages.</p>
+    
+    <h2>5. Visual Effects</h2>
+    <p>The landing page features a particle background and a falling confetti effect for a dynamic experience. These effects adjust automatically based on your selected theme (dark or light) and do not require any interaction.</p>
+    
+    <h2>6. Footer Navigation</h2>
+    <p>At the bottom of the page, the footer provides links to important pages like <a href="https://akashcmj69.github.io/Novatools/terms-of-service.html">Terms of Service</a>, <a href="https://akashcmj69.github.io/Novatools/privacy-policy.html">Privacy Policy</a>, <a href="https://akashcmj69.github.io/Novatools/contact-us.html">Contact Us</a>, and <a href="https://akashcmj69.github.io/Novatools/disclaimer.html">Disclaimer</a>. Click these links to learn more about our policies or to get in touch.</p>
+    
+    <h2>7. Contacting Support</h2>
+    <p>If you have questions or encounter issues while navigating the landing page, visit our <a href="https://akashcmj69.github.io/Novatools/contact-us.html">Contact Us</a> 
+  </section>
+
+  
+
+  <script>
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    const savedTheme = localStorage.getItem('theme') || 
+                      (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    
+    body.setAttribute('data-theme', savedTheme);
+    updateParticles(savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateParticles(newTheme);
+    });
+    
+    function updateParticles(theme) {
+      const particlesConfig = {
+        "particles": {
+          "number": {"value": 120},
+          "size": {"value": 2},
+          "move": {
+            "speed": 1.2,
+            "direction": "none",
+            "random": true
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 120,
+            "color": theme === 'dark' ? "#ffffff" : "#000000",
+            "opacity": 0.4,
+            "width": 1
+          },
+          "color": {"value": theme === 'dark' ? "#ffffff" : "#000000"},
+          "opacity": {"value": 0.6}
+        },
+        "interactivity": {
+          "events": {
+            "onhover": {"enable": false},
+            "onclick": {"enable": false}
+          }
+        }
+      };
+      
+      if (typeof particlesJS !== 'undefined') {
+        particlesJS("particles-js", particlesConfig);
+      }
+    }
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const overlay = document.getElementById('overlay');
+    
+    menuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+    
+    overlay.addEventListener('click', closeMenu);
+    
+    const navLinks = document.querySelectorAll('.navbar a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        closeMenu();
+        const targetId = this.getAttribute('href');
+        if (targetId.startsWith('#')) {
+          e.preventDefault();
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            window.scrollTo({
+              top: targetSection.offsetTop - 70,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+    
+    function closeMenu() {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.classList.remove('active');
+      });
+    }
+    
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        closeMenu();
+      }
+    });
+
+    // Dropdown Toggle for Mobile
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          this.classList.toggle('active');
+        }
+      });
+    });
+
+    // Continuous Falling Pepper
+    function createPepper() {
+      const pepper = document.createElement('div');
+      pepper.classList.add('pepper');
+      pepper.style.left = Math.random() * window.innerWidth + "px";
+      const theme = body.getAttribute('data-theme');
+      const colors = theme === 'dark' 
+        ? ["#FF00AA", "#0000FF", "#ffffff", "#00ffff"] 
+        : ["#FF00AA", "#0000FF", "#000000", "#0077ff"];
+      pepper.style.background = colors[Math.floor(Math.random() * colors.length)];
+      pepper.style.animationDuration = (5 + Math.random() * 5) + "s";
+      document.body.appendChild(pepper);
+      setTimeout(() => { pepper.remove(); }, 10000);
+    }
+    setInterval(createPepper, 300);
+
+    // Smooth Section Animation on Scroll
+    const sections = document.querySelectorAll('.how-to-use-section, .section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
